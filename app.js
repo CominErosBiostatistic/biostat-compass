@@ -154,7 +154,7 @@ function citations(today = new Date()) {
 // ---------- Feedback by email ----------
 
 // Address that receives feedback; while it is null the feedback buttons are hidden
-const FEEDBACK_EMAIL = null; // e.g. "biostat.compass@example.org"
+const FEEDBACK_EMAIL = "comin.eros1998+biostatcompass@gmail.com"; // the +biostatcompass part lets Gmail label these messages
 
 const FEEDBACK_TYPES = {
   thanks: { label: "It was useful", subject: "Feedback", prompt: "What was useful:" },
