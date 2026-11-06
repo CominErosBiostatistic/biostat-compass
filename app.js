@@ -147,7 +147,6 @@ function citations(today = new Date()) {
       `  note    = {Decision support for the choice of a statistical model}`,
       `}`,
     ].filter(Boolean).join("\n"),
-    Methods: `The choice of statistical method was guided by ${name} (version ${version}; ${author.familyName}, ${year}), which applies recommendations from the methodological literature; the sources of the individual recommendations are cited in the text.`,
   };
 }
 
@@ -433,7 +432,7 @@ function resultPage(query) {
       <h2>Citing this result</h2>
       <p class="small">If you use this suggestion in a thesis, a protocol or an article, cite the tool and, above all, the original sources listed above.</p>
       <div class="format"><pre>${esc(cit.APA)}</pre></div>
-      <a href="#/cite">More formats (Vancouver, BibTeX, sentence for the Methods section)</a>
+      <a href="#/cite">More formats (Vancouver, BibTeX)</a>
     </section>
     ${feedbackSection(true)}
     <div class="actions row">
@@ -525,7 +524,7 @@ function citePage() {
     <h1>How to cite</h1>
     <p class="lead">If the tool helped you in a thesis, a protocol, an analysis plan or an article, cite it with the version:
     the rules change with the literature, and the version makes the choice reproducible.</p>
-    ${Object.entries({ APA: "APA 7", Vancouver: "Vancouver (biomedical journals)", BibTeX: "BibTeX (LaTeX, Zotero, Mendeley)", Methods: "Sentence for the Methods section" })
+    ${Object.entries({ APA: "APA 7", Vancouver: "Vancouver (biomedical journals)", BibTeX: "BibTeX (LaTeX, Zotero, Mendeley)" })
       .map(([k, title]) => `
         <div class="format card">
           <h2>${esc(title)}</h2>

@@ -10,8 +10,7 @@
 
 [`../CITATION.cff`](../CITATION.cff) gives the title, author (with ORCID), version, licence and links.
 GitHub reads it and shows a "Cite this repository" button; Zenodo and reference managers read it too.
-In the app, the **Cite** page gives APA, Vancouver, BibTeX and a ready sentence for the Methods
-section, and every result shows the citation of the tool next to the original sources.
+In the app, the **Cite** page gives APA, Vancouver and BibTeX, and every result shows the citation of the tool next to the original sources.
 
 ## 2. DOI from Zenodo
 
