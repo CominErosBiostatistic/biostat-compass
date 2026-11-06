@@ -1,6 +1,6 @@
 {
-  "version": "0.1",
-  "note": "For each combination of answers, the rule with the most matching conditions applies. The validator checks that there is always exactly one.",
+  "version": "0.2",
+  "note": "For each combination of answers, the rule with the highest priority applies; with equal priority, the rule with the most matching conditions. The validator checks that there is always exactly one.",
   "models": [
     {
       "id": "describe_continuous",
@@ -22,14 +22,21 @@
       "sources": [
         "lang2015",
         "assel2019",
+        "lesko2022",
+        "conroy2020",
         "hernan2019",
-        "westreich2013"
+        "westreich2013",
+        "naing2000"
       ],
       "measure": "Mean (SD) and median [IQR]; mean difference with 95% CI when describing groups",
       "alternatives": [
         {
           "name": "Simple linear regression (descriptive)",
           "when": "To describe how the mean of the outcome differs between groups or along a variable: each coefficient is the difference in means per category or per unit, read as a description, not as a causal effect"
+        },
+        {
+          "name": "Direct standardisation",
+          "when": "Comparing populations with a different structure (for example age): the summaries are computed as if the populations had the same structure"
         }
       ]
     },
@@ -46,12 +53,29 @@
         ]
       },
       "name": "Frequencies and proportions with confidence intervals",
-      "description": "Number and percentage for each category, always with the denominator stated.",
-      "assumptions": [],
+      "description": "Number and percentage for each category, with the denominator stated and a score (Wilson) confidence interval for proportions.",
+      "assumptions": [
+        "Define the target population, the time and the measure (for example prevalence on a given date)",
+        "Simple (Wald) intervals can be inaccurate with small samples or proportions near 0 or 1"
+      ],
       "sources": [
         "lang2015",
-        "assel2019"
-      ]
+        "assel2019",
+        "newcombe1998",
+        "lesko2022",
+        "naing2000"
+      ],
+      "alternatives": [
+        {
+          "name": "Stratified proportions",
+          "when": "Describing the outcome in subgroups chosen in advance (for example by sex or age group)"
+        },
+        {
+          "name": "Directly standardised prevalence",
+          "when": "Comparing populations with a different structure, for example by age"
+        }
+      ],
+      "measure": "Proportion (prevalence or cumulative incidence) with 95% CI"
     },
     {
       "id": "describe_count",
@@ -64,14 +88,29 @@
         ]
       },
       "name": "Rates per person-time",
-      "description": "Number of events divided by total observation time, for example per 1000 person-years, with a confidence interval.",
+      "description": "Number of events divided by the total observation time, for example per 1000 person-years, with an exact (Poisson) confidence interval.",
       "assumptions": [
         "The observation time of each subject needs to be known."
       ],
       "sources": [
         "schober2021count",
-        "coxe2009"
-      ]
+        "coxe2009",
+        "ulm1990",
+        "fay1997",
+        "naing2000",
+        "lesko2022"
+      ],
+      "alternatives": [
+        {
+          "name": "Directly standardised rates",
+          "when": "Comparing populations with a different age structure; a gamma-based interval is suggested"
+        },
+        {
+          "name": "Standardised mortality (or incidence) ratio",
+          "when": "Comparing a population with reference rates (indirect standardisation)"
+        }
+      ],
+      "measure": "Rate per person-time with 95% CI"
     },
     {
       "id": "describe_survival",
@@ -89,10 +128,23 @@
       "name": "Kaplan-Meier curve",
       "description": "Survival curve with the number at risk below the plot, median survival and survival at fixed clinical time points.",
       "assumptions": [
-        "Censoring is non-informative: subjects who leave the study have the same risk as those who stay."
+        "Censoring is non-informative: subjects who leave the study have the same risk as those who stay.",
+        "Late entry, loss to follow-up and competing events can bias the description"
       ],
       "sources": [
-        "schober2018survival"
+        "schober2018survival",
+        "uno2014",
+        "lesko2022"
+      ],
+      "alternatives": [
+        {
+          "name": "Restricted mean survival time",
+          "when": "Summarising the average event-free time up to a fixed horizon"
+        },
+        {
+          "name": "Curves by stratum",
+          "when": "Describing subgroups chosen in advance"
+        }
       ]
     },
     {
@@ -113,7 +165,8 @@
       "assumptions": [],
       "sources": [
         "austin2016",
-        "andersen2012"
+        "andersen2012",
+        "lesko2022"
       ]
     },
     {
@@ -640,6 +693,198 @@
       ],
       "sources": [
         "bossuyt2015"
+      ]
+    },
+    {
+      "id": "matched_case_control",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "design": [
+          "case_control"
+        ],
+        "outcome": [
+          "binary"
+        ],
+        "independence": [
+          "paired"
+        ]
+      },
+      "name": "Logistic regression adjusted for the matching factors, or conditional logistic regression",
+      "description": "Matching does not remove confounding by the matching factors: they need to be controlled in the analysis. With frequency matching or a few large strata, an ordinary (unconditional) logistic regression that includes the matching factors is usually adequate; with individual matching and many small strata, conditional logistic regression avoids sparse-data bias.",
+      "simpleTest": "McNemar's test for 1:1 matched pairs.",
+      "measure": "Odds ratio with 95% CI",
+      "assumptions": [
+        "The matching factors are included in the analysis",
+        "Matching on variables affected by the exposure or the outcome is generally discouraged"
+      ],
+      "sources": [
+        "pearce2016",
+        "mansournia2013",
+        "greenland2016sparse"
+      ]
+    },
+    {
+      "id": "crossover_continuous",
+      "priority": 1,
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "design": [
+          "crossover"
+        ],
+        "outcome": [
+          "continuous"
+        ]
+      },
+      "name": "Linear mixed model with treatment and period effects",
+      "description": "Within-subject comparison: treatment and period are fixed effects and the participant is a random effect. With two treatments and two periods, this is equivalent to comparing the within-subject period differences between the two sequence groups.",
+      "simpleTest": "t-test (or Mann-Whitney test) on the period differences between the two sequence groups.",
+      "measure": "Mean difference between treatments with 95% CI",
+      "assumptions": [
+        "Carry-over effects should be ruled out, mainly with an adequate wash-out period",
+        "The analysis by sequence group separates period effects from treatment effects"
+      ],
+      "sources": [
+        "wellek2012",
+        "dwan2019",
+        "detry2016"
+      ]
+    },
+    {
+      "id": "crossover_other",
+      "priority": 1,
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "design": [
+          "crossover"
+        ],
+        "outcome": [
+          "binary",
+          "ordinal",
+          "nominal",
+          "count",
+          "time_to_event"
+        ]
+      },
+      "name": "Mixed-effects model for the type of outcome, with treatment and period effects",
+      "description": "The same structure as for continuous outcomes, with the model suited to the outcome: mixed-effects logistic regression for binary outcomes, ordinal or multinomial models for categories, Poisson or negative binomial models for counts.",
+      "measure": "Odds ratio or rate ratio between treatments with 95% CI",
+      "assumptions": [
+        "Carry-over effects should be ruled out, mainly with an adequate wash-out period",
+        "Time-to-event outcomes rarely suit a cross-over design"
+      ],
+      "sources": [
+        "wellek2012",
+        "dwan2019",
+        "hubbard2010"
+      ]
+    },
+    {
+      "id": "g_methods",
+      "priority": 2,
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "exposure": [
+          "time_varying"
+        ],
+        "tv_confounding": [
+          "yes"
+        ]
+      },
+      "name": "g-methods: marginal structural model with inverse probability weights, g-formula or g-estimation",
+      "description": "When confounders change over time and are affected by earlier exposure, standard regression adjustment is biased whether or not those confounders are included. g-methods estimate the effect of exposure strategies under weaker conditions.",
+      "alternatives": [
+        {
+          "name": "Target trial emulation with cloning, censoring and weighting",
+          "when": "Comparing sustained treatment strategies with observational data"
+        }
+      ],
+      "measure": "Contrast of outcomes under exposure strategies (risk difference, risk ratio or hazard ratio) with 95% CI, often by bootstrap",
+      "assumptions": [
+        "Exchangeability, positivity and consistency at each time point",
+        "Check the distribution of the weights; truncation is an option when they are extreme",
+        "The models for exposure (weights) or for outcome and confounders (g-formula) need to be specified correctly"
+      ],
+      "sources": [
+        "naimi2017",
+        "robins2000",
+        "daniel2013",
+        "cole2008",
+        "hernan2022"
+      ]
+    },
+    {
+      "id": "meta_analysis",
+      "when": {
+        "goal": [
+          "meta_analysis"
+        ]
+      },
+      "name": "Random-effects meta-analysis (Hartung-Knapp-Sidik-Jonkman)",
+      "description": "Pools the effect estimates of the studies, allowing for real differences between them. The Hartung-Knapp-Sidik-Jonkman method gives more appropriate confidence intervals than the classic DerSimonian-Laird method.",
+      "alternatives": [
+        {
+          "name": "Common-effect (fixed-effect) meta-analysis",
+          "when": "The studies are assumed to estimate the same effect: it answers a narrower question"
+        }
+      ],
+      "measure": "Pooled effect on the scale of the studies (OR, RR, HR, mean difference) with 95% CI and 95% prediction interval",
+      "assumptions": [
+        "Report heterogeneity: tau² and I²",
+        "Report the prediction interval: the range of effects expected in a new setting",
+        "Combine effect estimates on the same scale"
+      ],
+      "sources": [
+        "riley2011",
+        "inthout2014",
+        "higgins2003",
+        "page2021"
+      ]
+    },
+    {
+      "id": "prevalent_new_user",
+      "priority": 1,
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "design": [
+          "cohort",
+          "routine_data"
+        ],
+        "drug_comparison": [
+          "switchers"
+        ]
+      },
+      "name": "Prevalent new-user design with time-conditional propensity scores",
+      "description": "When many users of the newer drug switched from the comparator, an incident new-user design would exclude most of them. The prevalent new-user design defines exposure sets (by time or by number of prescriptions), computes time-conditional propensity scores of starting the newer drug, and matches each user of the newer drug to a comparator user with a similar score at the same point of treatment history. The outcome is then compared in the matched cohort, typically with a Cox model.",
+      "alternatives": [
+        {
+          "name": "Incident new-user, active-comparator design",
+          "when": "Enough patients start either drug for the first time"
+        }
+      ],
+      "measure": "Hazard ratio (or another measure suited to the outcome) with 95% CI in the matched cohort",
+      "assumptions": [
+        "Time zero is aligned: follow-up starts at the switch for the newer drug and at the matched point for the comparator",
+        "Covariates are measured before time zero, not afterwards",
+        "Covariate balance is checked after matching"
+      ],
+      "sources": [
+        "suissa2017",
+        "ray2003",
+        "austin2011",
+        "hernan2016"
       ]
     }
   ]

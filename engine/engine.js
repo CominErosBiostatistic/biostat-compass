@@ -63,11 +63,12 @@ export function nextQuestion(questions, answers) {
   return activeQuestions(questions, answers).find((q) => !(q.id in answers)) ?? null;
 }
 
-// The rule with the most matching conditions (the most specific) applies
+// The rule with the highest priority applies; with equal priority, the one with
+// the most matching conditions (the most specific)
 export function chooseModel(models, answers) {
   const candidates = models.filter((m) => conditionHolds(m.when, answers));
   if (candidates.length === 0) return { model: null, ties: [] };
-  const weight = (m) => Object.keys(m.when).length;
+  const weight = (m) => (m.priority ?? 0) * 100 + Object.keys(m.when).length;
   const top = Math.max(...candidates.map(weight));
   const best = candidates.filter((m) => weight(m) === top);
   return { model: best[0], ties: best.length > 1 ? best.map((m) => m.id) : [] };

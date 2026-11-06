@@ -704,6 +704,230 @@
       "pmid": "23092060",
       "doi": "10.11613/BM.2012.031",
       "pubmed": true
+    },
+    {
+      "id": "lesko2022",
+      "number": 89,
+      "citation": "Lesko CR, Fox MP, Edwards JK. A framework for descriptive epidemiology. Am J Epidemiol. 2022;191:2063-2070.",
+      "pmid": "35774001",
+      "doi": "10.1093/aje/kwac115",
+      "pubmed": true
+    },
+    {
+      "id": "fox2022",
+      "number": 90,
+      "citation": "Fox MP, Murray EJ, Lesko CR, Sealy-Jefferson S. On the need to revitalize descriptive epidemiology. Am J Epidemiol. 2022;191:1174-1179.",
+      "pmid": "35325036",
+      "doi": "10.1093/aje/kwac056",
+      "pubmed": true
+    },
+    {
+      "id": "conroy2020",
+      "number": 91,
+      "citation": "Conroy S, Murray EJ. Let the question determine the methods: descriptive epidemiology done right. Br J Cancer. 2020;123:1351-1352.",
+      "pmid": "32814836",
+      "doi": "10.1038/s41416-020-1019-z",
+      "pubmed": true
+    },
+    {
+      "id": "hayeslarson2019",
+      "number": 92,
+      "citation": "Hayes-Larson E, Kezios KL, Mooney SJ, Lovasi G. Who is in this study, anyway? Guidelines for a useful Table 1. J Clin Epidemiol. 2019;114:125-132.",
+      "pmid": "31229583",
+      "doi": "10.1016/j.jclinepi.2019.06.011",
+      "pubmed": true
+    },
+    {
+      "id": "newcombe1998",
+      "number": 93,
+      "citation": "Newcombe RG. Two-sided confidence intervals for the single proportion: comparison of seven methods. Stat Med. 1998;17:857-872.",
+      "pmid": "9595616",
+      "doi": "10.1002/(sici)1097-0258(19980430)17:8<857::aid-sim777>3.0.co;2-e",
+      "pubmed": true
+    },
+    {
+      "id": "fay1997",
+      "number": 94,
+      "citation": "Fay MP, Feuer EJ. Confidence intervals for directly standardized rates: a method based on the gamma distribution. Stat Med. 1997;16:791-801.",
+      "pmid": "9131766",
+      "doi": "10.1002/(sici)1097-0258(19970415)16:7<791::aid-sim500>3.0.co;2-#",
+      "pubmed": true
+    },
+    {
+      "id": "naing2000",
+      "number": 95,
+      "citation": "Naing NN. Easy way to learn standardization: direct and indirect methods. Malays J Med Sci. 2000;7:10-15.",
+      "pmid": "22844209",
+      "doi": null,
+      "pubmed": true
+    },
+    {
+      "id": "ulm1990",
+      "number": 96,
+      "citation": "Ulm K. A simple method to calculate the confidence interval of a standardized mortality ratio (SMR). Am J Epidemiol. 1990;131:373-375.",
+      "pmid": "2296988",
+      "doi": "10.1093/oxfordjournals.aje.a115507",
+      "pubmed": true
+    },
+    {
+      "id": "pearce2016",
+      "number": 97,
+      "citation": "Pearce N. Analysis of matched case-control studies. BMJ. 2016;352:i969.",
+      "pmid": "26916049",
+      "doi": "10.1136/bmj.i969",
+      "pubmed": true
+    },
+    {
+      "id": "mansournia2013",
+      "number": 98,
+      "citation": "Mansournia MA, Hernán MA, Greenland S. Matched designs and causal diagrams. Int J Epidemiol. 2013;42:860-869.",
+      "pmid": "23918854",
+      "doi": "10.1093/ije/dyt083",
+      "pubmed": true
+    },
+    {
+      "id": "dwan2019",
+      "number": 99,
+      "citation": "Dwan K, Li T, Altman DG, Elbourne D. CONSORT 2010 statement: extension to randomised crossover trials. BMJ. 2019;366:l4378.",
+      "pmid": "31366597",
+      "doi": "10.1136/bmj.l4378",
+      "pubmed": true
+    },
+    {
+      "id": "wellek2012",
+      "number": 100,
+      "citation": "Wellek S, Blettner M. On the proper use of the crossover design in clinical trials. Dtsch Arztebl Int. 2012;109:276-281.",
+      "pmid": "22567063",
+      "doi": "10.3238/arztebl.2012.0276",
+      "pubmed": true
+    },
+    {
+      "id": "piaggio2012",
+      "number": 101,
+      "citation": "Piaggio G, et al. Reporting of noninferiority and equivalence randomized trials: extension of the CONSORT 2010 statement. JAMA. 2012;308:2594-2604.",
+      "pmid": "23268518",
+      "doi": "10.1001/jama.2012.87802",
+      "pubmed": true
+    },
+    {
+      "id": "mauri2017",
+      "number": 102,
+      "citation": "Mauri L, D'Agostino RB Sr. Challenges in the design and interpretation of noninferiority trials. N Engl J Med. 2017;377:1357-1367.",
+      "pmid": "28976859",
+      "doi": "10.1056/NEJMra1510063",
+      "pubmed": true
+    },
+    {
+      "id": "page2021",
+      "number": 103,
+      "citation": "Page MJ, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71.",
+      "pmid": "33782057",
+      "doi": "10.1136/bmj.n71",
+      "pubmed": true
+    },
+    {
+      "id": "riley2011",
+      "number": 104,
+      "citation": "Riley RD, Higgins JPT, Deeks JJ. Interpretation of random effects meta-analyses. BMJ. 2011;342:d549.",
+      "pmid": "21310794",
+      "doi": "10.1136/bmj.d549",
+      "pubmed": true
+    },
+    {
+      "id": "inthout2014",
+      "number": 105,
+      "citation": "IntHout J, Ioannidis JPA, Borm GF. The Hartung-Knapp-Sidik-Jonkman method for random effects meta-analysis is straightforward and considerably outperforms the standard DerSimonian-Laird method. BMC Med Res Methodol. 2014;14:25.",
+      "pmid": "24548571",
+      "doi": "10.1186/1471-2288-14-25",
+      "pubmed": true
+    },
+    {
+      "id": "higgins2003",
+      "number": 106,
+      "citation": "Higgins JPT, Thompson SG, Deeks JJ, Altman DG. Measuring inconsistency in meta-analyses. BMJ. 2003;327:557-560.",
+      "pmid": "12958120",
+      "doi": "10.1136/bmj.327.7414.557",
+      "pubmed": true
+    },
+    {
+      "id": "kruschke2021",
+      "number": 107,
+      "citation": "Kruschke JK. Bayesian analysis reporting guidelines. Nat Hum Behav. 2021;5:1282-1291.",
+      "pmid": "34400814",
+      "doi": "10.1038/s41562-021-01177-7",
+      "pubmed": true
+    },
+    {
+      "id": "ferreira2020",
+      "number": 108,
+      "citation": "Ferreira D, et al. Theory and practical use of Bayesian methods in interpreting clinical trial data: a narrative review. Br J Anaesth. 2020;125:201-207.",
+      "pmid": "32600802",
+      "doi": "10.1016/j.bja.2020.04.092",
+      "pubmed": true
+    },
+    {
+      "id": "greenland2006",
+      "number": 109,
+      "citation": "Greenland S. Bayesian perspectives for epidemiological research: I. Foundations and basic methods. Int J Epidemiol. 2006;35:765-775.",
+      "pmid": "16446352",
+      "doi": "10.1093/ije/dyi312",
+      "pubmed": true
+    },
+    {
+      "id": "spiegelhalter2000",
+      "number": 110,
+      "citation": "Spiegelhalter DJ, Myles JP, Jones DR, Abrams KR. Bayesian methods in health technology assessment: a review. Health Technol Assess. 2000;4(38):1-130.",
+      "pmid": "11134920",
+      "doi": null,
+      "pubmed": true
+    },
+    {
+      "id": "naimi2017",
+      "number": 111,
+      "citation": "Naimi AI, Cole SR, Kennedy EH. An introduction to g methods. Int J Epidemiol. 2017;46:756-762.",
+      "pmid": "28039382",
+      "doi": "10.1093/ije/dyw323",
+      "pubmed": true
+    },
+    {
+      "id": "robins2000",
+      "number": 112,
+      "citation": "Robins JM, Hernán MA, Brumback B. Marginal structural models and causal inference in epidemiology. Epidemiology. 2000;11:550-560.",
+      "pmid": "10955408",
+      "doi": "10.1097/00001648-200009000-00011",
+      "pubmed": true
+    },
+    {
+      "id": "daniel2013",
+      "number": 113,
+      "citation": "Daniel RM, et al. Methods for dealing with time-dependent confounding. Stat Med. 2013;32:1584-1618.",
+      "pmid": "23208861",
+      "doi": "10.1002/sim.5686",
+      "pubmed": true
+    },
+    {
+      "id": "cole2008",
+      "number": 114,
+      "citation": "Cole SR, Hernán MA. Constructing inverse probability weights for marginal structural models. Am J Epidemiol. 2008;168:656-664.",
+      "pmid": "18682488",
+      "doi": "10.1093/aje/kwn164",
+      "pubmed": true
+    },
+    {
+      "id": "suissa2017",
+      "number": 115,
+      "citation": "Suissa S, Moodie EEM, Dell'Aniello S. Prevalent new-user cohort designs for comparative drug effect studies by time-conditional propensity scores. Pharmacoepidemiol Drug Saf. 2017;26:459-468.",
+      "pmid": "27610604",
+      "doi": "10.1002/pds.4107",
+      "pubmed": true
+    },
+    {
+      "id": "ray2003",
+      "number": 116,
+      "citation": "Ray WA. Evaluating medication effects outside of clinical trials: new-user designs. Am J Epidemiol. 2003;158:915-920.",
+      "pmid": "14585769",
+      "doi": "10.1093/aje/kwg231",
+      "pubmed": true
     }
   ]
 }

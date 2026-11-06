@@ -1,7 +1,7 @@
 {
   "title": "Biostat Compass",
   "upload_type": "software",
-  "description": "<p>A web application that helps students and researchers in biostatistics choose a statistical model from the research question, the study design and the structure of the data. Every suggestion is based on published methodological literature, which the tool cites (88 sources, 84 verified on PubMed).</p><p>Every result is a suggestion, not a conclusion: the choice of method, and the responsibility for it, remain with the researcher.</p><p>The project was built entirely with Claude Code (Anthropic), directed and reviewed by the author.</p><p>Code under the MIT licence; rules and texts under CC BY 4.0.</p><p>App: <a href=\"https://cominerosbiostatistic.github.io/biostat-compass/\">https://cominerosbiostatistic.github.io/biostat-compass/</a></p>",
+  "description": "<p>A web application that helps students and researchers in biostatistics choose a statistical model from the research question, the study design and the structure of the data. Every suggestion is based on published methodological literature, which the tool cites (116 sources, 112 verified on PubMed).</p><p>Every result is a suggestion, not a conclusion: the choice of method, and the responsibility for it, remain with the researcher.</p><p>The project was built entirely with Claude Code (Anthropic), directed and reviewed by the author.</p><p>Code under the MIT licence; rules and texts under CC BY 4.0.</p><p>App: <a href=\"https://cominerosbiostatistic.github.io/biostat-compass/\">https://cominerosbiostatistic.github.io/biostat-compass/</a></p>",
   "creators": [
     {
       "name": "Comin, Eros",

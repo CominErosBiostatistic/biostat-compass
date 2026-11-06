@@ -21,7 +21,10 @@ detry2016 hubbard2010 schober2021count coxe2009 liu2017 bland1986 koo2016 schobe
 mishra2019 altman2006 royston2006 sterne2009 white2011 lee2021 greenland2016pvalues wasserstein2016
 greenland2016sparse knol2012interaction kahan2014 kahan2024 hopewell2025 chan2025 vonelm2007
 benchimol2015 bossuyt2015 lang2015 assel2019 gamble2017 grant2019 harrell2015 austin2015 heinze2002
-mchugh2012""".split()
+mchugh2012 lesko2022 fox2022 conroy2020 hayeslarson2019 newcombe1998 fay1997 naing2000 ulm1990
+pearce2016 mansournia2013 dwan2019 wellek2012 piaggio2012 mauri2017 page2021 riley2011 inthout2014
+higgins2003 kruschke2021 ferreira2020 greenland2006 spiegelhalter2000 naimi2017 robins2000 daniel2013
+cole2008 suissa2017 ray2003""".split()
 
 text = open(src, encoding="utf-8").read()
 bibliography = text.split("## Bibliography", 1)[1]

@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "questions": [
     {
       "id": "goal",
@@ -29,6 +29,11 @@
           "help": "Sensitivity and specificity of a test against a reference standard."
         },
         {
+          "id": "meta_analysis",
+          "label": "Combine the results of several studies (meta-analysis)",
+          "help": "Pool the effect estimates of published or shared studies."
+        },
+        {
           "id": "agreement",
           "label": "Measure agreement or reliability",
           "help": "Do two instruments or two raters give the same result?"
@@ -37,7 +42,8 @@
       "sources": [
         "hernan2019",
         "shmueli2010",
-        "ramspek2021"
+        "ramspek2021",
+        "page2021"
       ]
     },
     {
@@ -77,12 +83,17 @@
           "label": "Randomised controlled trial (RCT)"
         },
         {
+          "id": "crossover",
+          "label": "Randomised cross-over trial",
+          "help": "Each participant receives the treatments in sequence, with a wash-out period between them."
+        },
+        {
           "id": "cohort",
           "label": "Cohort (prospective or retrospective)"
         },
         {
           "id": "case_control",
-          "label": "Case-control"
+          "label": "Case-control (matched or unmatched)"
         },
         {
           "id": "cross_sectional",
@@ -96,7 +107,47 @@
       "sources": [
         "vonelm2007",
         "benchimol2015",
-        "hopewell2025"
+        "hopewell2025",
+        "dwan2019"
+      ],
+      "askIf": {
+        "goal": [
+          "describe",
+          "effect",
+          "predict",
+          "test_accuracy",
+          "agreement"
+        ]
+      }
+    },
+    {
+      "id": "trial_aim",
+      "short": "Trial aim",
+      "text": "What does the trial aim to show?",
+      "type": "choice",
+      "askIf": {
+        "design": [
+          "rct",
+          "crossover"
+        ]
+      },
+      "options": [
+        {
+          "id": "superiority",
+          "label": "That one treatment is better (superiority)"
+        },
+        {
+          "id": "non_inferiority",
+          "label": "That a treatment is not worse by more than a margin (non-inferiority)"
+        },
+        {
+          "id": "equivalence",
+          "label": "That two treatments are equivalent within a margin (equivalence)"
+        }
+      ],
+      "sources": [
+        "piaggio2012",
+        "mauri2017"
       ]
     },
     {
@@ -214,6 +265,13 @@
           "describe",
           "effect",
           "predict"
+        ],
+        "design": [
+          "rct",
+          "cohort",
+          "case_control",
+          "cross_sectional",
+          "routine_data"
         ]
       },
       "options": [
@@ -223,7 +281,7 @@
         },
         {
           "id": "paired",
-          "label": "Paired (before and after, matched pairs)"
+          "label": "Paired or matched (before and after, matched pairs, matched case-control)"
         },
         {
           "id": "repeated",
@@ -300,6 +358,70 @@
       ]
     },
     {
+      "id": "tv_confounding",
+      "short": "Time-varying confounding",
+      "text": "Are there confounders that change over time and are themselves affected by earlier exposure?",
+      "help": "Example: blood pressure influences whether a drug is started, and the drug then changes blood pressure.",
+      "type": "choice",
+      "askIf": {
+        "exposure": [
+          "time_varying"
+        ]
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": "Yes"
+        },
+        {
+          "id": "no",
+          "label": "No"
+        },
+        {
+          "id": "unsure",
+          "label": "I am not sure"
+        }
+      ],
+      "sources": [
+        "daniel2013",
+        "naimi2017"
+      ]
+    },
+    {
+      "id": "drug_comparison",
+      "short": "Drug comparison",
+      "text": "Does the study compare a newer drug with an older one?",
+      "help": "In routine data, many users of a newer drug have often used the older (comparator) drug before.",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "effect"
+        ],
+        "design": [
+          "cohort",
+          "routine_data"
+        ]
+      },
+      "options": [
+        {
+          "id": "no_drugs",
+          "label": "No, the study does not compare two drugs"
+        },
+        {
+          "id": "new_users",
+          "label": "Yes, and most patients start either drug for the first time"
+        },
+        {
+          "id": "switchers",
+          "label": "Yes, and many users of the newer drug switched from, or added it to, the older drug"
+        }
+      ],
+      "sources": [
+        "ray2003",
+        "suissa2017"
+      ]
+    },
+    {
       "id": "ml",
       "short": "Machine learning",
       "text": "Do you plan to use machine learning (random forest, neural networks, SVM)?",
@@ -325,6 +447,34 @@
       ]
     },
     {
+      "id": "bayes",
+      "short": "Bayesian analysis",
+      "text": "Do you plan a Bayesian analysis?",
+      "help": "A Bayesian analysis combines prior information with the data and reports probabilities of effects.",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "effect",
+          "predict",
+          "meta_analysis"
+        ]
+      },
+      "options": [
+        {
+          "id": "no",
+          "label": "No, the usual (frequentist) approach"
+        },
+        {
+          "id": "yes",
+          "label": "Yes"
+        }
+      ],
+      "sources": [
+        "ferreira2020",
+        "greenland2006"
+      ]
+    },
+    {
       "id": "n",
       "short": "Subjects",
       "text": "How many subjects are in the dataset?",
@@ -332,6 +482,30 @@
       "min": 1,
       "sources": [
         "riley2020"
+      ],
+      "askIf": {
+        "goal": [
+          "describe",
+          "effect",
+          "predict",
+          "test_accuracy",
+          "agreement"
+        ]
+      }
+    },
+    {
+      "id": "studies",
+      "short": "Studies",
+      "text": "How many studies do you want to combine?",
+      "type": "number",
+      "min": 2,
+      "askIf": {
+        "goal": [
+          "meta_analysis"
+        ]
+      },
+      "sources": [
+        "inthout2014"
       ]
     },
     {
@@ -400,7 +574,16 @@
       "sources": [
         "sterne2009",
         "lee2021"
-      ]
+      ],
+      "askIf": {
+        "goal": [
+          "describe",
+          "effect",
+          "predict",
+          "test_accuracy",
+          "agreement"
+        ]
+      }
     },
     {
       "id": "audience",

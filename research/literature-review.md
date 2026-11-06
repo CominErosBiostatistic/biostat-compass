@@ -1,6 +1,6 @@
 # Choosing a statistical model: the evidence behind the app
 
-Working document, version 0.1 (4 November 2026).
+Working document, version 0.2 (6 November 2026).
 It collects the rules the app applies and, for each one, the publication it comes from.
 No rule in the app should exist without an entry in the [bibliography](#bibliography).
 
@@ -16,7 +16,9 @@ No rule in the app should exist without an entry in the [bibliography](#bibliogr
 8. [The three audiences: exam, clinicians, publication](#8-the-three-audiences)
 9. [Draft decision tree](#9-draft-decision-tree)
 10. [Open points](#10-open-points)
-11. [Bibliography](#bibliography)
+11. [Descriptive analysis](#11-descriptive-analysis)
+12. [Designs and approaches added in version 0.2.0](#12-designs-and-approaches-added-in-version-020)
+13. [Bibliography](#bibliography)
 
 ## 1. Search method
 
@@ -261,13 +263,49 @@ flowchart TD
 
 ## 10. Open points
 
-| Topic                 | To decide                                                                                           |
-| --------------------- | --------------------------------------------------------------------------------------------------- |
-| Bayesian methods      | Include Bayesian models as an alternative for small samples? This needs its own search.             |
-| Special designs       | Matched case-control (conditional logistic regression), cross-over, non-inferiority, meta-analysis. |
-| Longitudinal EHR data | Time-varying exposures (Cox with time-dependent covariates, g-methods).                             |
-| Validation of the app | Have teachers, students and researchers try the tree on real cases before wider release.            |
-| Updates               | Review the bibliography once a year (new EQUATOR guidelines).                                       |
+| Topic                 | To decide                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| Validation of the app | Have teachers, students and researchers try the tree on real cases before wider release. |
+| Updates               | Review the bibliography once a year (new EQUATOR guidelines).                            |
+
+## 11. Descriptive analysis
+
+Added in version 0.2.0, after a review of what the literature recommends for descriptive questions.
+
+### 11.1 What a descriptive question needs
+
+| Source                 | Message                                                                                                                                                                                                                                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lesko 2022 [89]        | A descriptive question states the target population (person, place, time), the outcome and the measure of occurrence (incidence, prevalence, average time to event). Auxiliary variables are pre-specified either as stratification factors or as nuisance variables to standardise over. |
+| Fox 2022 [90]          | Descriptive epidemiology is subject to systematic and random error like causal research, and deserves the same rigour.                                                                                                                                                                    |
+| Conroy 2020 [91]       | For descriptive goals, adjusting for confounding is often unnecessary and can be harmful: it changes the quantity being described.                                                                                                                                                        |
+| Hernán 2019 [1]        | Description is a task of its own, distinct from prediction and causal inference.                                                                                                                                                                                                          |
+| Hayes-Larson 2019 [92] | Guidance for a useful "Table 1" describing the study sample, including missing data, weights and clustered data.                                                                                                                                                                          |
+
+### 11.2 Methods by outcome
+
+| Outcome               | Suggested summary                                                                 | Comparing groups or populations                                                | Sources       |
+| --------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------- |
+| Continuous            | Mean (SD) and median [IQR]; compare them to judge symmetry                        | Difference in means; unadjusted linear regression as a description             | [81,82,89,91] |
+| Binary or categorical | Proportion with a score (Wilson) confidence interval                              | Stratified proportions; directly standardised prevalence across populations    | [93,95,89]    |
+| Count or rate         | Rate per person-time with an exact Poisson confidence interval                    | Directly standardised rates (gamma interval); SMR for indirect standardisation | [94-96,57]    |
+| Time to event         | Kaplan-Meier curve, median and survival at fixed times; mean time up to a horizon | Curves by stratum; cumulative incidence with competing events                  | [45,49,50,89] |
+
+Consequence for the app: for a descriptive question, regression is offered only as an unadjusted
+description of differences, or to standardise over pre-specified variables; adjustment for
+confounders is flagged as usually unnecessary [91].
+
+## 12. Designs and approaches added in version 0.2.0
+
+| Design or approach           | Suggested method                                                                                                                  | Key points                                                                                                                                                                                                                   | Sources   |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| Matched case-control         | Logistic regression adjusted for the matching factors; conditional logistic regression with individual matching and sparse strata | Matching does not remove confounding by the matching factors: they must be controlled in the analysis, but a conditional analysis is not always required                                                                     | [97,98]   |
+| Randomised cross-over        | Model with treatment and period effects on within-subject data (linear mixed model for continuous outcomes)                       | Analyse by sequence group; carry-over effects must be ruled out by design (wash-out); report with the CONSORT cross-over extension                                                                                           | [99,100]  |
+| Non-inferiority, equivalence | Same model as for superiority; conclusions from the confidence interval compared with a pre-specified margin                      | Justify the margin; analyse both intention-to-treat and per-protocol populations; report with the CONSORT extension                                                                                                          | [101,102] |
+| Meta-analysis                | Random-effects meta-analysis with the Hartung-Knapp-Sidik-Jonkman method                                                          | Report heterogeneity (tau², I²) and the prediction interval; extra caution with fewer than 5 studies; report with PRISMA 2020                                                                                                | [103-106] |
+| Bayesian analysis            | An approach rather than a model: the same models with prior distributions                                                         | Justify the priors and run sensitivity analyses with different priors; priors expressible as prior data; report with BARG                                                                                                    | [107-110] |
+| g-methods                    | Marginal structural models with inverse probability weights, g-formula, g-estimation                                              | Needed when time-varying confounders are affected by earlier exposure; check weights (positivity, truncation)                                                                                                                | [111-114] |
+| Prevalent new-user design    | Time-conditional propensity scores within exposure sets, matching, then a Cox model in the matched cohort                         | For comparisons of a newer with an older drug, when many users of the newer drug switched from the older one; keeps the patients an incident new-user design would exclude; time zero aligned, covariates measured before it | [115,116] |
 
 ## Bibliography
 
@@ -396,3 +434,34 @@ Every PubMed entry gives its PMID and DOI. Entries marked `[not in PubMed]` come
 86. Austin PC, Steyerberg EW. The number of subjects per variable required in linear regression analyses. *J Clin Epidemiol*. 2015;68:627-636. PMID 25704724. doi:10.1016/j.jclinepi.2014.12.014
 87. Heinze G, Schemper M. A solution to the problem of separation in logistic regression. *Stat Med*. 2002;21:2409-2419. PMID 12210625. doi:10.1002/sim.1047
 88. McHugh ML. Interrater reliability: the kappa statistic. *Biochem Med (Zagreb)*. 2012;22:276-282. PMID 23092060. doi:10.11613/BM.2012.031
+
+### Added in version 0.2.0
+
+89. Lesko CR, Fox MP, Edwards JK. A framework for descriptive epidemiology. *Am J Epidemiol*. 2022;191:2063-2070. PMID 35774001. doi:10.1093/aje/kwac115
+90. Fox MP, Murray EJ, Lesko CR, Sealy-Jefferson S. On the need to revitalize descriptive epidemiology. *Am J Epidemiol*. 2022;191:1174-1179. PMID 35325036. doi:10.1093/aje/kwac056
+91. Conroy S, Murray EJ. Let the question determine the methods: descriptive epidemiology done right. *Br J Cancer*. 2020;123:1351-1352. PMID 32814836. doi:10.1038/s41416-020-1019-z
+92. Hayes-Larson E, Kezios KL, Mooney SJ, Lovasi G. Who is in this study, anyway? Guidelines for a useful Table 1. *J Clin Epidemiol*. 2019;114:125-132. PMID 31229583. doi:10.1016/j.jclinepi.2019.06.011
+93. Newcombe RG. Two-sided confidence intervals for the single proportion: comparison of seven methods. *Stat Med*. 1998;17:857-872. PMID 9595616. doi:10.1002/(sici)1097-0258(19980430)17:8<857::aid-sim777>3.0.co;2-e
+94. Fay MP, Feuer EJ. Confidence intervals for directly standardized rates: a method based on the gamma distribution. *Stat Med*. 1997;16:791-801. PMID 9131766. doi:10.1002/(sici)1097-0258(19970415)16:7<791::aid-sim500>3.0.co;2-#
+95. Naing NN. Easy way to learn standardization: direct and indirect methods. *Malays J Med Sci*. 2000;7:10-15. PMID 22844209.
+96. Ulm K. A simple method to calculate the confidence interval of a standardized mortality ratio (SMR). *Am J Epidemiol*. 1990;131:373-375. PMID 2296988. doi:10.1093/oxfordjournals.aje.a115507
+97. Pearce N. Analysis of matched case-control studies. *BMJ*. 2016;352:i969. PMID 26916049. doi:10.1136/bmj.i969
+98. Mansournia MA, Hernán MA, Greenland S. Matched designs and causal diagrams. *Int J Epidemiol*. 2013;42:860-869. PMID 23918854. doi:10.1093/ije/dyt083
+99. Dwan K, Li T, Altman DG, Elbourne D. CONSORT 2010 statement: extension to randomised crossover trials. *BMJ*. 2019;366:l4378. PMID 31366597. doi:10.1136/bmj.l4378
+100. Wellek S, Blettner M. On the proper use of the crossover design in clinical trials. *Dtsch Arztebl Int*. 2012;109:276-281. PMID 22567063. doi:10.3238/arztebl.2012.0276
+101. Piaggio G, et al. Reporting of noninferiority and equivalence randomized trials: extension of the CONSORT 2010 statement. *JAMA*. 2012;308:2594-2604. PMID 23268518. doi:10.1001/jama.2012.87802
+102. Mauri L, D'Agostino RB Sr. Challenges in the design and interpretation of noninferiority trials. *N Engl J Med*. 2017;377:1357-1367. PMID 28976859. doi:10.1056/NEJMra1510063
+103. Page MJ, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. *BMJ*. 2021;372:n71. PMID 33782057. doi:10.1136/bmj.n71
+104. Riley RD, Higgins JPT, Deeks JJ. Interpretation of random effects meta-analyses. *BMJ*. 2011;342:d549. PMID 21310794. doi:10.1136/bmj.d549
+105. IntHout J, Ioannidis JPA, Borm GF. The Hartung-Knapp-Sidik-Jonkman method for random effects meta-analysis is straightforward and considerably outperforms the standard DerSimonian-Laird method. *BMC Med Res Methodol*. 2014;14:25. PMID 24548571. doi:10.1186/1471-2288-14-25
+106. Higgins JPT, Thompson SG, Deeks JJ, Altman DG. Measuring inconsistency in meta-analyses. *BMJ*. 2003;327:557-560. PMID 12958120. doi:10.1136/bmj.327.7414.557
+107. Kruschke JK. Bayesian analysis reporting guidelines. *Nat Hum Behav*. 2021;5:1282-1291. PMID 34400814. doi:10.1038/s41562-021-01177-7
+108. Ferreira D, et al. Theory and practical use of Bayesian methods in interpreting clinical trial data: a narrative review. *Br J Anaesth*. 2020;125:201-207. PMID 32600802. doi:10.1016/j.bja.2020.04.092
+109. Greenland S. Bayesian perspectives for epidemiological research: I. Foundations and basic methods. *Int J Epidemiol*. 2006;35:765-775. PMID 16446352. doi:10.1093/ije/dyi312
+110. Spiegelhalter DJ, Myles JP, Jones DR, Abrams KR. Bayesian methods in health technology assessment: a review. *Health Technol Assess*. 2000;4(38):1-130. PMID 11134920.
+111. Naimi AI, Cole SR, Kennedy EH. An introduction to g methods. *Int J Epidemiol*. 2017;46:756-762. PMID 28039382. doi:10.1093/ije/dyw323
+112. Robins JM, Hernán MA, Brumback B. Marginal structural models and causal inference in epidemiology. *Epidemiology*. 2000;11:550-560. PMID 10955408. doi:10.1097/00001648-200009000-00011
+113. Daniel RM, et al. Methods for dealing with time-dependent confounding. *Stat Med*. 2013;32:1584-1618. PMID 23208861. doi:10.1002/sim.5686
+114. Cole SR, Hernán MA. Constructing inverse probability weights for marginal structural models. *Am J Epidemiol*. 2008;168:656-664. PMID 18682488. doi:10.1093/aje/kwn164
+115. Suissa S, Moodie EEM, Dell'Aniello S. Prevalent new-user cohort designs for comparative drug effect studies by time-conditional propensity scores. *Pharmacoepidemiol Drug Saf*. 2017;26:459-468. PMID 27610604. doi:10.1002/pds.4107
+116. Ray WA. Evaluating medication effects outside of clinical trials: new-user designs. *Am J Epidemiol*. 2003;158:915-920. PMID 14585769. doi:10.1093/aje/kwg231

@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "note": "Levels: info (advice), caution (possible risk of error), serious (the model may not be estimable), limit (case not covered by the app). Fields computed by the engine: epv = events / params; spp = n / params.",
   "warnings": [
     {
@@ -233,20 +233,6 @@
       ]
     },
     {
-      "id": "case_control_matched",
-      "level": "limit",
-      "when": {
-        "design": [
-          "case_control"
-        ],
-        "independence": [
-          "paired"
-        ]
-      },
-      "text": "A matched case-control study usually needs conditional logistic regression, which this version of the rules does not cover yet.",
-      "sources": []
-    },
-    {
       "id": "binary_common_or",
       "level": "caution",
       "when": {
@@ -382,7 +368,8 @@
         "goal": [
           "effect",
           "predict",
-          "describe"
+          "describe",
+          "meta_analysis"
         ]
       },
       "text": "Estimates with confidence intervals are generally more informative than p-values alone. The p-value does not measure the size of an effect, nor the probability that the hypothesis is true.",
@@ -402,6 +389,187 @@
       "text": "If you assess an interaction, it is recommended to report the effect in each stratum, on both the additive and the multiplicative scale.",
       "sources": [
         "knol2012interaction"
+      ]
+    },
+    {
+      "id": "describe_no_adjustment",
+      "level": "info",
+      "when": {
+        "goal": [
+          "describe"
+        ]
+      },
+      "text": "For a descriptive question, adjusting for confounders is usually not needed and can change the quantity being described. It is generally preferable to stratify by, or standardise over, variables chosen in advance.",
+      "sources": [
+        "conroy2020",
+        "lesko2022"
+      ]
+    },
+    {
+      "id": "describe_target",
+      "level": "info",
+      "when": {
+        "goal": [
+          "describe"
+        ]
+      },
+      "text": "Consider stating the target population (person, place and time), the outcome and the measure of occurrence (for example prevalence on a date, incidence, mean time to event) before the analysis.",
+      "sources": [
+        "lesko2022",
+        "fox2022"
+      ]
+    },
+    {
+      "id": "crossover_carryover",
+      "level": "caution",
+      "when": {
+        "design": [
+          "crossover"
+        ]
+      },
+      "text": "In a cross-over trial, carry-over effects can bias the comparison; an adequate wash-out period and an analysis by sequence group are usually recommended.",
+      "sources": [
+        "wellek2012",
+        "dwan2019"
+      ]
+    },
+    {
+      "id": "crossover_tte",
+      "level": "caution",
+      "when": {
+        "design": [
+          "crossover"
+        ],
+        "outcome": [
+          "time_to_event"
+        ]
+      },
+      "text": "Time-to-event outcomes rarely suit a cross-over design: the event can end the follow-up before the second period.",
+      "sources": [
+        "wellek2012"
+      ]
+    },
+    {
+      "id": "ni_margin",
+      "level": "caution",
+      "when": {
+        "trial_aim": [
+          "non_inferiority",
+          "equivalence"
+        ]
+      },
+      "text": "For non-inferiority or equivalence, the margin needs to be pre-specified and justified, and the conclusion comes from comparing the confidence interval with the margin. Analysing both the intention-to-treat and the per-protocol populations is recommended.",
+      "sources": [
+        "piaggio2012",
+        "mauri2017"
+      ]
+    },
+    {
+      "id": "meta_few",
+      "level": "caution",
+      "when": {
+        "goal": [
+          "meta_analysis"
+        ],
+        "studies": {
+          "lt": 5
+        }
+      },
+      "text": "With fewer than 5 studies, especially of very different sizes, the between-study variance is estimated poorly and even the Hartung-Knapp-Sidik-Jonkman method needs extra caution.",
+      "sources": [
+        "inthout2014"
+      ]
+    },
+    {
+      "id": "meta_heterogeneity",
+      "level": "info",
+      "when": {
+        "goal": [
+          "meta_analysis"
+        ]
+      },
+      "text": "The pooled estimate is an average effect: the prediction interval shows how much the effect may vary between settings and is usually more informative for practice.",
+      "sources": [
+        "riley2011",
+        "higgins2003"
+      ]
+    },
+    {
+      "id": "bayes_priors",
+      "level": "info",
+      "when": {
+        "bayes": [
+          "yes"
+        ]
+      },
+      "text": "In a Bayesian analysis it is recommended to justify the prior distributions, to run sensitivity analyses with different priors, and to report the posterior distribution with credible intervals.",
+      "sources": [
+        "kruschke2021",
+        "spiegelhalter2000",
+        "greenland2006"
+      ]
+    },
+    {
+      "id": "bayes_small",
+      "level": "info",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "epv": {
+          "lt": 10
+        },
+        "bayes": [
+          "no"
+        ]
+      },
+      "text": "With few events, a Bayesian analysis with weakly informative priors is one option that can stabilise the estimates; priors expressed as prior data make their weight visible.",
+      "sources": [
+        "greenland2006",
+        "ferreira2020"
+      ]
+    },
+    {
+      "id": "tv_unsure",
+      "level": "caution",
+      "when": {
+        "tv_confounding": [
+          "unsure"
+        ]
+      },
+      "text": "If confounders change over time and may be affected by earlier exposure, standard regression adjustment can be biased: g-methods (marginal structural models, g-formula) are designed for this situation.",
+      "sources": [
+        "daniel2013",
+        "naimi2017"
+      ]
+    },
+    {
+      "id": "new_user_design",
+      "level": "info",
+      "when": {
+        "drug_comparison": [
+          "new_users"
+        ]
+      },
+      "text": "With patients starting either drug for the first time, a new-user (incident user) active-comparator design is usually recommended: follow-up starts at initiation and covariates are measured before it, which avoids prevalent-user bias.",
+      "sources": [
+        "ray2003",
+        "hernan2016"
+      ]
+    },
+    {
+      "id": "prevalent_user_bias",
+      "level": "caution",
+      "when": {
+        "drug_comparison": [
+          "switchers"
+        ]
+      },
+      "text": "Including prevalent users without aligning time zero can introduce bias: they are 'survivors' of the early period of treatment, and their covariates may already be affected by the drug.",
+      "sources": [
+        "ray2003",
+        "suissa2017"
       ]
     }
   ]

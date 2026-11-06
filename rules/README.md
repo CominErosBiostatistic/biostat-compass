@@ -27,7 +27,9 @@ Fields computed by the engine: `epv` = `events / params`, `spp` = `n / params`.
 
 ## Specificity of models
 
-Among the matching models, the one with the most fields in `when` wins. For example,
+Among the matching models, the one with the highest `priority` wins (models without it have
+priority 0); with equal priority, the one with the most fields in `when` wins. Priority is used
+for designs that override the usual choice, such as cross-over trials (1) and g-methods (2). For example,
 `competing_effect` (3 fields) and `survival_independent` (4 fields) never overlap, because the
 first needs `competing = yes` and the second `competing = no`.
 

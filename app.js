@@ -6,7 +6,7 @@ import { recommend, activeQuestions, nextQuestion, cleanAnswers } from "./engine
 // Release data: update together with CITATION.cff, sw.js and index.html at every release
 const APP = {
   name: "Biostat Compass",
-  version: "0.1.1",
+  version: "0.2.0",
   year: 2026,
   author: {
     familyName: "Comin",
@@ -212,7 +212,7 @@ function homePage() {
 
     <div class="grid">
       <div class="stat"><strong>${nSources}</strong><span>publications cited, ${nPubmed} verified on PubMed</span></div>
-      <div class="stat"><strong>${rules.models.length}</strong><span>models and methods, from the t-test to Fine-Gray</span></div>
+      <div class="stat"><strong>${rules.models.length}</strong><span>models and methods, from the t-test to g-methods</span></div>
       <div class="stat"><strong>3</strong><span>audiences: exam or thesis, clinicians, publication</span></div>
       <div class="stat"><strong>Offline</strong><span>installable on phone and computer, no data sent anywhere</span></div>
     </div>
@@ -221,7 +221,7 @@ function homePage() {
       <h2>How it works</h2>
       <ol class="steps">
         <li><span><strong>The question before the data.</strong> Describing, estimating an effect and predicting need different methods, even on the same data.</span></li>
-        <li><span><strong>Then design, outcome and data structure.</strong> Questions appear only when they matter: between 5 and 12 in total.</span></li>
+        <li><span><strong>Then design, outcome and data structure.</strong> Questions appear only when they matter: between 4 and 14 in total.</span></li>
         <li><span><strong>Finally the audience.</strong> It does not change which model suits the data, it changes what may be useful to show and which guidelines may apply.</span></li>
       </ol>
     </section>
@@ -570,7 +570,7 @@ function methodPage() {
       <h2>Limits</h2>
       <ul class="list">
         <li>It supports the choice of a method: it does not know your study better than you do, and it does not replace a statistician.</li>
-        <li>Not covered yet: matched case-control studies, cross-over trials, non-inferiority, meta-analysis, Bayesian methods, g-methods for time-varying exposures.</li>
+        <li>Not covered yet: cluster-randomised and stepped-wedge trials, network and diagnostic meta-analysis, mediation analysis, survey weights. Bayesian analysis is covered as an approach (priors, reporting), not with separate models.</li>
         <li>The sources were collected with a targeted search, not a systematic review.</li>
         <li>Your answers stay on your device: the tool sends no data. Only if you choose to send feedback does your email app send the message you write.</li>
       </ul>

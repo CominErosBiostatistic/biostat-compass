@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "note": "Reporting guidelines, shown when the audience is a publication. All matching guidelines apply.",
   "guidelines": [
     {
@@ -10,7 +10,8 @@
           "publication"
         ],
         "design": [
-          "rct"
+          "rct",
+          "crossover"
         ]
       },
       "use": "Article reporting the results of an RCT",
@@ -26,7 +27,8 @@
           "publication"
         ],
         "design": [
-          "rct"
+          "rct",
+          "crossover"
         ]
       },
       "use": "Protocol of the RCT",
@@ -42,7 +44,8 @@
           "publication"
         ],
         "design": [
-          "rct"
+          "rct",
+          "crossover"
         ]
       },
       "use": "Statistical analysis plan of the RCT",
@@ -191,6 +194,71 @@
       "use": "Basic statistical reporting, for all studies",
       "sources": [
         "lang2015"
+      ]
+    },
+    {
+      "id": "consort_crossover",
+      "name": "CONSORT extension for randomised cross-over trials",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "design": [
+          "crossover"
+        ]
+      },
+      "use": "Cross-over trials",
+      "sources": [
+        "dwan2019"
+      ]
+    },
+    {
+      "id": "consort_ni",
+      "name": "CONSORT extension for non-inferiority and equivalence trials",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "trial_aim": [
+          "non_inferiority",
+          "equivalence"
+        ]
+      },
+      "use": "Non-inferiority and equivalence trials",
+      "sources": [
+        "piaggio2012"
+      ]
+    },
+    {
+      "id": "prisma",
+      "name": "PRISMA 2020",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "meta_analysis"
+        ]
+      },
+      "use": "Systematic reviews and meta-analyses",
+      "sources": [
+        "page2021"
+      ]
+    },
+    {
+      "id": "barg",
+      "name": "BARG (Bayesian Analysis Reporting Guidelines)",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "bayes": [
+          "yes"
+        ]
+      },
+      "use": "Bayesian analyses",
+      "sources": [
+        "kruschke2021"
       ]
     }
   ]

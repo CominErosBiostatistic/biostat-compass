@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "note": "Suggestions on what may be useful to show for each audience. All matching rules apply, not only the most specific one.",
   "presentation": [
     {
@@ -196,6 +196,72 @@
         "collins2024tripod",
         "vancalster2019",
         "vickers2006"
+      ]
+    },
+    {
+      "id": "publication_descriptive",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "describe"
+        ]
+      },
+      "show": [
+        "The target population, the time and the measure of occurrence",
+        "A Table 1 that describes the study sample, including missing data"
+      ],
+      "avoid": [
+        "Adjusted estimates presented as a description of the population"
+      ],
+      "sources": [
+        "lesko2022",
+        "hayeslarson2019",
+        "conroy2020"
+      ]
+    },
+    {
+      "id": "clinicians_meta",
+      "when": {
+        "audience": [
+          "clinicians"
+        ],
+        "goal": [
+          "meta_analysis"
+        ]
+      },
+      "show": [
+        "A forest plot with the pooled estimate and the prediction interval",
+        "Absolute effects for a typical baseline risk when the outcome is binary"
+      ],
+      "avoid": [
+        "The pooled estimate without the heterogeneity"
+      ],
+      "sources": [
+        "riley2011",
+        "akl2011"
+      ]
+    },
+    {
+      "id": "publication_bayes",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "bayes": [
+          "yes"
+        ]
+      },
+      "show": [
+        "The priors, the posterior distribution and the probability of clinically relevant effects"
+      ],
+      "avoid": [
+        "Priors chosen without justification or sensitivity analysis"
+      ],
+      "sources": [
+        "kruschke2021",
+        "ferreira2020"
       ]
     }
   ]

@@ -51,10 +51,15 @@ export function validate(rules) {
   //    Numeric questions do not decide the model and are skipped.
   const reached = new Set();
   let paths = 0;
+  let fewest = Infinity;
+  let most = 0;
   const explore = (answers) => {
-    const next = activeQuestions(rules.questions, answers).find((q) => q.type === "choice" && !(q.id in answers));
+    const active = activeQuestions(rules.questions, answers);
+    const next = active.find((q) => q.type === "choice" && !(q.id in answers));
     if (!next) {
       paths++;
+      fewest = Math.min(fewest, active.length);
+      most = Math.max(most, active.length);
       const { model, ties } = chooseModel(rules.models, answers);
       const label = JSON.stringify(answers);
       if (!model) errors.push(`no model for ${label}`);
@@ -67,6 +72,7 @@ export function validate(rules) {
   explore({});
   for (const m of rules.models) if (!reached.has(m.id)) errors.push(`models/${m.id}: never chosen`);
   notes.push(`${paths} paths explored, ${reached.size} of ${rules.models.length} models reachable`);
+  notes.push(`between ${fewest} and ${most} questions per path`);
 
   // 5. Sources in the bibliography that no rule cites (not an error)
   const cited = new Set(Object.values(groups(rules)).flat().flatMap((x) => x.sources ?? []));

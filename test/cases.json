@@ -137,6 +137,206 @@
       "excludedWarnings": [
         "competing_km"
       ]
+    },
+    {
+      "name": "Matched case-control study",
+      "answers": {
+        "goal": "effect",
+        "design": "case_control",
+        "outcome": "binary",
+        "outcome_frequency": "rare",
+        "independence": "paired",
+        "exposure": "binary",
+        "bayes": "no",
+        "n": 300,
+        "events": 100,
+        "params": 5,
+        "missing": "none",
+        "audience": "publication"
+      },
+      "expectedModel": "matched_case_control",
+      "expectedWarnings": [
+        "case_control_or"
+      ],
+      "expectedGuidelines": [
+        "strobe"
+      ]
+    },
+    {
+      "name": "Cross-over trial, continuous outcome",
+      "answers": {
+        "goal": "effect",
+        "design": "crossover",
+        "trial_aim": "superiority",
+        "outcome": "continuous",
+        "exposure": "binary",
+        "bayes": "no",
+        "n": 24,
+        "params": 3,
+        "missing": "none",
+        "audience": "publication"
+      },
+      "expectedModel": "crossover_continuous",
+      "expectedWarnings": [
+        "crossover_carryover"
+      ],
+      "expectedGuidelines": [
+        "consort",
+        "consort_crossover"
+      ]
+    },
+    {
+      "name": "Cross-over trial, time to event",
+      "answers": {
+        "goal": "effect",
+        "design": "crossover",
+        "trial_aim": "superiority",
+        "outcome": "time_to_event",
+        "competing": "no",
+        "exposure": "binary",
+        "bayes": "no",
+        "n": 40,
+        "events": 20,
+        "params": 3,
+        "missing": "none",
+        "audience": "exam"
+      },
+      "expectedModel": "crossover_other",
+      "expectedWarnings": [
+        "crossover_carryover",
+        "crossover_tte"
+      ]
+    },
+    {
+      "name": "Non-inferiority trial",
+      "answers": {
+        "goal": "effect",
+        "design": "rct",
+        "trial_aim": "non_inferiority",
+        "outcome": "binary",
+        "outcome_frequency": "common",
+        "independence": "independent",
+        "exposure": "binary",
+        "bayes": "no",
+        "n": 800,
+        "events": 200,
+        "params": 3,
+        "missing": "few",
+        "audience": "publication"
+      },
+      "expectedModel": "binary_independent",
+      "expectedWarnings": [
+        "ni_margin"
+      ],
+      "expectedGuidelines": [
+        "consort_ni"
+      ]
+    },
+    {
+      "name": "Meta-analysis of 4 studies",
+      "answers": {
+        "goal": "meta_analysis",
+        "bayes": "no",
+        "studies": 4,
+        "audience": "clinicians"
+      },
+      "expectedModel": "meta_analysis",
+      "expectedWarnings": [
+        "meta_few",
+        "meta_heterogeneity"
+      ]
+    },
+    {
+      "name": "Bayesian analysis of an RCT",
+      "answers": {
+        "goal": "effect",
+        "design": "rct",
+        "trial_aim": "superiority",
+        "outcome": "continuous",
+        "independence": "independent",
+        "exposure": "binary",
+        "bayes": "yes",
+        "n": 60,
+        "params": 2,
+        "missing": "none",
+        "audience": "publication"
+      },
+      "expectedModel": "continuous_independent",
+      "expectedWarnings": [
+        "bayes_priors"
+      ],
+      "expectedGuidelines": [
+        "barg"
+      ]
+    },
+    {
+      "name": "Time-varying treatment with time-varying confounding",
+      "answers": {
+        "goal": "effect",
+        "design": "routine_data",
+        "outcome": "time_to_event",
+        "independence": "independent",
+        "competing": "no",
+        "exposure": "time_varying",
+        "tv_confounding": "yes",
+        "bayes": "no",
+        "n": 10000,
+        "events": 500,
+        "params": 12,
+        "missing": "some",
+        "audience": "publication"
+      },
+      "expectedModel": "g_methods",
+      "expectedWarnings": [
+        "exposure_time_varying"
+      ],
+      "excludedWarnings": [
+        "tv_unsure"
+      ]
+    },
+    {
+      "name": "Descriptive rates",
+      "answers": {
+        "goal": "describe",
+        "design": "cohort",
+        "outcome": "count",
+        "independence": "independent",
+        "n": 1000,
+        "missing": "none",
+        "audience": "publication"
+      },
+      "expectedModel": "describe_count",
+      "expectedWarnings": [
+        "describe_no_adjustment",
+        "describe_target"
+      ]
+    },
+    {
+      "name": "Newer drug vs older drug, many switchers (prevalent new-user design)",
+      "answers": {
+        "goal": "effect",
+        "design": "routine_data",
+        "outcome": "time_to_event",
+        "independence": "independent",
+        "competing": "no",
+        "exposure": "binary",
+        "drug_comparison": "switchers",
+        "bayes": "no",
+        "n": 170000,
+        "events": 2000,
+        "params": 20,
+        "missing": "few",
+        "audience": "publication"
+      },
+      "expectedModel": "prevalent_new_user",
+      "expectedWarnings": [
+        "prevalent_user_bias",
+        "effect_target_trial"
+      ],
+      "expectedGuidelines": [
+        "strobe",
+        "record"
+      ]
     }
   ]
 }
