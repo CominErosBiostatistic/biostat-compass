@@ -20,6 +20,7 @@ license:
   - CC-BY-4.0
 repository-code: "https://github.com/CominErosBiostatistic/biostat-compass"
 url: "https://cominerosbiostatistic.github.io/biostat-compass/"
+doi: 10.5281/zenodo.24020233
 keywords:
   - biostatistics
   - statistical model selection

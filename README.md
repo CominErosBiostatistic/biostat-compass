@@ -1,5 +1,7 @@
 # Biostat Compass
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24020233.svg)](https://doi.org/10.5281/zenodo.24020233)
+
 A web app that helps students and researchers choose a statistical model from the research
 question, the study design and the structure of the data. Every suggestion cites the
 methodological literature it comes from.
@@ -37,7 +39,8 @@ be installed on a phone or a computer. No data leave the device.
 
 ## How to cite
 
-See [`CITATION.cff`](CITATION.cff) or the **Cite** page of the app. Please also cite the original
+Cite with the DOI [10.5281/zenodo.24020233](https://doi.org/10.5281/zenodo.24020233), which always points to the latest version.
+See [`CITATION.cff`](CITATION.cff) or the **Cite** page of the app for ready-made formats. Please also cite the original
 sources listed with each suggestion.
 
 ## Disclaimer

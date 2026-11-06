@@ -15,7 +15,7 @@ const APP = {
   },
   url: "https://cominerosbiostatistic.github.io/biostat-compass/",
   repo: "https://github.com/CominErosBiostatistic/biostat-compass",
-  doi: null, // Zenodo concept DOI, to add after the first release
+  doi: "10.5281/zenodo.24020233", // Zenodo concept DOI: always points to the latest version
 };
 
 const LEVEL_NAMES = { serious: "Important", caution: "Caution", limit: "Not covered", info: "Advice" };

@@ -1,10 +1,10 @@
 # Making the tool citable
 
-| Level                    | What it gives                                              | Status               |
-| ------------------------ | ---------------------------------------------------------- | -------------------- |
-| 1. CITATION.cff          | "Cite this repository" button on GitHub, in APA and BibTeX | Done                 |
-| 2. DOI from Zenodo       | A permanent DOI for every version, citable in an article   | At the first release |
-| 3. Peer-reviewed article | A classic, indexed citation                                | Optional             |
+| Level                    | What it gives                                              | Status        |
+| ------------------------ | ---------------------------------------------------------- | ------------- |
+| 1. CITATION.cff          | "Cite this repository" button on GitHub, in APA and BibTeX | Done          |
+| 2. DOI from Zenodo       | A permanent DOI for every version, citable in an article   | Done (v0.1.1) |
+| 3. Peer-reviewed article | A classic, indexed citation                                | Optional      |
 
 ## 1. CITATION.cff
 
