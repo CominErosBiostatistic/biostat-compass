@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Decision tree: one question, two branches, one branch chosen -->
+  <rect width="512" height="512" rx="112" fill="#0f6e78"/>
+  <path d="M256 150 L256 236 M256 236 L156 330 M256 236 L356 330" stroke="#ffffff" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <circle cx="256" cy="140" r="52" fill="#ffffff"/>
+  <circle cx="148" cy="352" r="46" fill="none" stroke="#ffffff" stroke-width="26"/>
+  <circle cx="364" cy="352" r="52" fill="#9ee6ea"/>
+</svg>

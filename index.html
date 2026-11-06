@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Biostat Compass</title>
+  <meta name="description" content="A guide to choosing a statistical model in biostatistics, with rules based on the methodological literature and every source cited.">
+  <meta name="theme-color" content="#0f6e78" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <!-- ?v= changes at every release, so browsers do not use old files -->
+  <link rel="stylesheet" href="style.css?v=0.1.0">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#/">
+        <img src="icons/icon.svg" alt="" width="32" height="32">
+        <span>Biostat Compass</span>
+      </a>
+      <nav class="menu" aria-label="Main menu">
+        <a href="#/questions" data-page="questions">Start</a>
+        <a href="#/sources" data-page="sources">Sources</a>
+        <a href="#/cite" data-page="cite">Cite</a>
+        <a href="#/method" data-page="method">Method</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" tabindex="-1">
+    <p class="loading">Loading the rules...</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span id="version"></span>
+      <span>Decision support only: it does not replace discussing your study with a statistician.</span>
+      <span>Code under the MIT licence, rules and texts under CC BY 4.0.</span>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="app.js?v=0.1.0"></script>
+</body>
+</html>

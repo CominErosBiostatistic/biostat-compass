@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rule tests</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; background: #fff; color: #222; }
+    pre  { white-space: pre-wrap; font-size: 13px; }
+    .ok  { color: #1a7f37; }
+    .ko  { color: #c62828; }
+  </style>
+</head>
+<body>
+  <h1>Rule tests</h1>
+  <pre id="result">Running...</pre>
+  <script type="module">
+    import { recommend } from "../engine/engine.js";
+    import { validate, checkCase } from "../engine/validate.js";
+
+    // Loads a JSON file from rules/ or test/
+    const load = (path) => fetch(path).then((r) => r.json());
+
+    const [q, m, w, p, g, s, c] = await Promise.all([
+      "../rules/questions.json", "../rules/models.json", "../rules/warnings.json",
+      "../rules/presentation.json", "../rules/guidelines.json", "../rules/sources.json", "cases.json",
+    ].map(load));
+    const rules = {
+      questions: q.questions, models: m.models, warnings: w.warnings,
+      presentation: p.presentation, guidelines: g.guidelines, sources: s.sources,
+    };
+
+    const lines = [];
+    const v = validate(rules);
+    lines.push(`VALIDATION: ${v.ok ? "OK" : `${v.totalErrors} errors`}`);
+    v.errors.forEach((e) => lines.push(`  error: ${e}`));
+    v.notes.forEach((n) => lines.push(`  note: ${n}`));
+
+    let failed = 0;
+    lines.push("", "TEST CASES");
+    for (const testCase of c.cases) {
+      const r = recommend(rules, testCase.answers);
+      const problems = checkCase(r, testCase);
+      if (problems.length) failed++;
+      lines.push(`  ${problems.length ? "FAIL" : "OK"} ${testCase.name} -> ${r.model?.name}`);
+      problems.forEach((x) => lines.push(`      ${x}`));
+      lines.push(`      warnings: ${r.warnings.map((x) => x.id).join(", ") || "none"}`);
+    }
+    lines.push("", `RESULT: ${v.ok && failed === 0 ? "ALL OK" : "THERE ARE ERRORS"}`);
+
+    const out = document.getElementById("result");
+    out.textContent = lines.join("\n");
+    out.className = v.ok && failed === 0 ? "ok" : "ko";
+    window.result = { validation: v, failed };
+  </script>
+</body>
+</html>

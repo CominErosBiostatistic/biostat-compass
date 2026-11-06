@@ -1,0 +1,432 @@
+{
+  "version": "0.1",
+  "questions": [
+    {
+      "id": "goal",
+      "short": "Research question",
+      "text": "What is the research question?",
+      "help": "The aim decides the method more than the shape of the data. A causal analysis and a prediction model use different covariates and different quality measures.",
+      "type": "choice",
+      "options": [
+        {
+          "id": "describe",
+          "label": "Describe",
+          "help": "How common a disease is, how a measurement is distributed."
+        },
+        {
+          "id": "effect",
+          "label": "Estimate the effect of an exposure or a treatment",
+          "help": "Does drug A reduce mortality compared with drug B? Does smoking increase the risk of stroke?"
+        },
+        {
+          "id": "predict",
+          "label": "Predict an outcome for the individual patient",
+          "help": "Develop or validate a risk, diagnostic or prognostic model."
+        },
+        {
+          "id": "test_accuracy",
+          "label": "Assess the accuracy of a diagnostic test",
+          "help": "Sensitivity and specificity of a test against a reference standard."
+        },
+        {
+          "id": "agreement",
+          "label": "Measure agreement or reliability",
+          "help": "Do two instruments or two raters give the same result?"
+        }
+      ],
+      "sources": [
+        "hernan2019",
+        "shmueli2010",
+        "ramspek2021"
+      ]
+    },
+    {
+      "id": "predict_type",
+      "short": "Type of prediction",
+      "text": "Does the model predict a current state or a future event?",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "predict"
+        ]
+      },
+      "options": [
+        {
+          "id": "diagnosis",
+          "label": "Current state (diagnosis)",
+          "help": "Does the patient have the disease now?"
+        },
+        {
+          "id": "prognosis",
+          "label": "Future event (prognosis)",
+          "help": "Will the patient have the event within a given time?"
+        }
+      ],
+      "sources": [
+        "vansmeden2021"
+      ]
+    },
+    {
+      "id": "design",
+      "short": "Study design",
+      "text": "What is the study design?",
+      "type": "choice",
+      "options": [
+        {
+          "id": "rct",
+          "label": "Randomised controlled trial (RCT)"
+        },
+        {
+          "id": "cohort",
+          "label": "Cohort (prospective or retrospective)"
+        },
+        {
+          "id": "case_control",
+          "label": "Case-control"
+        },
+        {
+          "id": "cross_sectional",
+          "label": "Cross-sectional"
+        },
+        {
+          "id": "routine_data",
+          "label": "Routinely collected data (electronic health records, registries, administrative databases)"
+        }
+      ],
+      "sources": [
+        "vonelm2007",
+        "benchimol2015",
+        "hopewell2025"
+      ]
+    },
+    {
+      "id": "outcome",
+      "short": "Outcome",
+      "text": "What type of outcome variable do you have?",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "describe",
+          "effect",
+          "predict"
+        ]
+      },
+      "options": [
+        {
+          "id": "continuous",
+          "label": "Continuous",
+          "help": "Blood pressure, cholesterol, length of stay."
+        },
+        {
+          "id": "binary",
+          "label": "Binary",
+          "help": "Yes or no: died, recovered, admitted to hospital."
+        },
+        {
+          "id": "ordinal",
+          "label": "Ordinal",
+          "help": "Ordered categories: stage I-IV, modified Rankin scale."
+        },
+        {
+          "id": "nominal",
+          "label": "Nominal with more than 2 categories",
+          "help": "Categories with no order: tumour type."
+        },
+        {
+          "id": "count",
+          "label": "Count or rate",
+          "help": "Number of exacerbations, number of emergency visits."
+        },
+        {
+          "id": "time_to_event",
+          "label": "Time to event",
+          "help": "Time to death, relapse or admission, with censored patients."
+        }
+      ],
+      "sources": [
+        "schober2021logistic",
+        "schober2018survival",
+        "schober2021count",
+        "liu2017"
+      ]
+    },
+    {
+      "id": "outcome_frequency",
+      "short": "Outcome frequency",
+      "text": "How common is the outcome in the study population?",
+      "type": "choice",
+      "askIf": {
+        "outcome": [
+          "binary"
+        ]
+      },
+      "options": [
+        {
+          "id": "rare",
+          "label": "Rare (below about 10%)"
+        },
+        {
+          "id": "common",
+          "label": "Common (10% or more)"
+        }
+      ],
+      "sources": [
+        "davies1998",
+        "knol2012cmaj"
+      ]
+    },
+    {
+      "id": "measure_type",
+      "short": "Type of measurement",
+      "text": "What type of measurement do you want to compare?",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "agreement"
+        ]
+      },
+      "options": [
+        {
+          "id": "continuous",
+          "label": "Continuous",
+          "help": "Two devices that measure blood pressure."
+        },
+        {
+          "id": "categorical",
+          "label": "Categorical or ordinal",
+          "help": "Two radiologists who classify the same images."
+        }
+      ],
+      "sources": [
+        "bland1986",
+        "koo2016",
+        "mchugh2012"
+      ]
+    },
+    {
+      "id": "independence",
+      "short": "Data structure",
+      "text": "Are the observations independent?",
+      "help": "Repeated measurements on the same patient, or patients from the same hospital, are correlated.",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "describe",
+          "effect",
+          "predict"
+        ]
+      },
+      "options": [
+        {
+          "id": "independent",
+          "label": "Yes, one observation per subject"
+        },
+        {
+          "id": "paired",
+          "label": "Paired (before and after, matched pairs)"
+        },
+        {
+          "id": "repeated",
+          "label": "Repeated measurements over time on the same subject"
+        },
+        {
+          "id": "cluster",
+          "label": "Clustered (hospitals, physicians, families)"
+        }
+      ],
+      "sources": [
+        "schober2018repeated",
+        "detry2016",
+        "hubbard2010"
+      ]
+    },
+    {
+      "id": "competing",
+      "short": "Competing events",
+      "text": "Are there events that prevent the event of interest?",
+      "help": "For example, if the outcome is cardiovascular death, death from cancer is a competing event.",
+      "type": "choice",
+      "askIf": {
+        "outcome": [
+          "time_to_event"
+        ]
+      },
+      "options": [
+        {
+          "id": "no",
+          "label": "No"
+        },
+        {
+          "id": "yes",
+          "label": "Yes"
+        }
+      ],
+      "sources": [
+        "austin2016",
+        "andersen2012"
+      ]
+    },
+    {
+      "id": "exposure",
+      "short": "Exposure",
+      "text": "What type is the main exposure?",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "effect"
+        ]
+      },
+      "options": [
+        {
+          "id": "binary",
+          "label": "Binary (treated or untreated)"
+        },
+        {
+          "id": "categorical",
+          "label": "Categorical with several levels"
+        },
+        {
+          "id": "continuous",
+          "label": "Continuous (dose, level of a biomarker)"
+        },
+        {
+          "id": "time_varying",
+          "label": "Changes over time (a drug started or stopped during follow-up)"
+        }
+      ],
+      "sources": [
+        "altman2006",
+        "hernan2016"
+      ]
+    },
+    {
+      "id": "ml",
+      "short": "Machine learning",
+      "text": "Do you plan to use machine learning (random forest, neural networks, SVM)?",
+      "type": "choice",
+      "askIf": {
+        "goal": [
+          "predict"
+        ]
+      },
+      "options": [
+        {
+          "id": "no",
+          "label": "No, regression"
+        },
+        {
+          "id": "yes",
+          "label": "Yes"
+        }
+      ],
+      "sources": [
+        "christodoulou2019",
+        "vanderploeg2014"
+      ]
+    },
+    {
+      "id": "n",
+      "short": "Subjects",
+      "text": "How many subjects are in the dataset?",
+      "type": "number",
+      "min": 1,
+      "sources": [
+        "riley2020"
+      ]
+    },
+    {
+      "id": "events",
+      "short": "Events",
+      "text": "How many events?",
+      "help": "For a binary outcome: the number of subjects in the less frequent category. For time to event: the number of observed events.",
+      "type": "number",
+      "min": 0,
+      "askIf": {
+        "outcome": [
+          "binary",
+          "time_to_event"
+        ],
+        "goal": [
+          "effect",
+          "predict"
+        ]
+      },
+      "sources": [
+        "peduzzi1996",
+        "riley2020"
+      ]
+    },
+    {
+      "id": "params",
+      "short": "Parameters",
+      "text": "How many parameters do you want to estimate?",
+      "help": "Count parameters, not columns: a categorical variable with k levels counts k-1, a spline with 3 knots counts 2.",
+      "type": "number",
+      "min": 1,
+      "askIf": {
+        "goal": [
+          "effect",
+          "predict"
+        ]
+      },
+      "sources": [
+        "riley2020",
+        "harrell2015"
+      ]
+    },
+    {
+      "id": "missing",
+      "short": "Missing data",
+      "text": "How much data is missing?",
+      "type": "choice",
+      "options": [
+        {
+          "id": "none",
+          "label": "None"
+        },
+        {
+          "id": "few",
+          "label": "Little (under 5% of subjects)"
+        },
+        {
+          "id": "some",
+          "label": "A fair amount in the covariates"
+        },
+        {
+          "id": "outcome",
+          "label": "A fair amount in the outcome"
+        }
+      ],
+      "sources": [
+        "sterne2009",
+        "lee2021"
+      ]
+    },
+    {
+      "id": "audience",
+      "short": "Audience",
+      "text": "Who are the results for?",
+      "help": "This does not change the right model for the data: it changes what to show and which formal requirements apply.",
+      "type": "choice",
+      "options": [
+        {
+          "id": "exam",
+          "label": "A university exam or thesis"
+        },
+        {
+          "id": "clinicians",
+          "label": "A presentation to clinicians"
+        },
+        {
+          "id": "publication",
+          "label": "A scientific publication"
+        }
+      ],
+      "sources": [
+        "windish2007",
+        "akl2011",
+        "lang2015"
+      ]
+    }
+  ]
+}

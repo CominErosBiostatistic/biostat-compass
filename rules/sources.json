@@ -1,0 +1,709 @@
+{
+  "version": "0.1",
+  "sources": [
+    {
+      "id": "hernan2019",
+      "number": 1,
+      "citation": "Hernán MA, Hsu J, Healy B. A second chance to get causal inference right: a classification of data science tasks. Chance. 2019;32(1):42-49.",
+      "pmid": null,
+      "doi": "10.1080/09332480.2019.1579578",
+      "pubmed": false
+    },
+    {
+      "id": "shmueli2010",
+      "number": 2,
+      "citation": "Shmueli G. To explain or to predict? Stat Sci. 2010;25(3):289-310.",
+      "pmid": null,
+      "doi": "10.1214/10-STS330",
+      "pubmed": false
+    },
+    {
+      "id": "ramspek2021",
+      "number": 3,
+      "citation": "Ramspek CL, et al. Prediction or causality? A scoping review of their conflation within current observational research. Eur J Epidemiol. 2021;36:889-898.",
+      "pmid": "34392488",
+      "doi": "10.1007/s10654-021-00794-w",
+      "pubmed": true
+    },
+    {
+      "id": "vansmeden2021",
+      "number": 4,
+      "citation": "van Smeden M, et al. Clinical prediction models: diagnosis versus prognosis. J Clin Epidemiol. 2021;132:142-145.",
+      "pmid": "33775387",
+      "doi": "10.1016/j.jclinepi.2021.01.009",
+      "pubmed": true
+    },
+    {
+      "id": "hernan2018",
+      "number": 5,
+      "citation": "Hernán MA. The C-word: scientific euphemisms do not improve causal inference from observational data. Am J Public Health. 2018;108:616-619.",
+      "pmid": "29565659",
+      "doi": "10.2105/AJPH.2018.304337",
+      "pubmed": true
+    },
+    {
+      "id": "westreich2013",
+      "number": 6,
+      "citation": "Westreich D, Greenland S. The table 2 fallacy: presenting and interpreting confounder and modifier coefficients. Am J Epidemiol. 2013;177:292-298.",
+      "pmid": "23371353",
+      "doi": "10.1093/aje/kws412",
+      "pubmed": true
+    },
+    {
+      "id": "tennant2021",
+      "number": 7,
+      "citation": "Tennant PWG, et al. Use of directed acyclic graphs (DAGs) to identify confounders in applied health research: review and recommendations. Int J Epidemiol. 2021;50:620-632.",
+      "pmid": "33330936",
+      "doi": "10.1093/ije/dyaa213",
+      "pubmed": true
+    },
+    {
+      "id": "vanderweele2019",
+      "number": 8,
+      "citation": "VanderWeele TJ. Principles of confounder selection. Eur J Epidemiol. 2019;34:211-219.",
+      "pmid": "30840181",
+      "doi": "10.1007/s10654-019-00494-6",
+      "pubmed": true
+    },
+    {
+      "id": "lederer2019",
+      "number": 9,
+      "citation": "Lederer DJ, et al. Control of confounding and reporting of results in causal inference studies. Ann Am Thorac Soc. 2019;16:22-28.",
+      "pmid": "30230362",
+      "doi": "10.1513/AnnalsATS.201808-564PS",
+      "pubmed": true
+    },
+    {
+      "id": "hernan2016",
+      "number": 10,
+      "citation": "Hernán MA, Robins JM. Using big data to emulate a target trial when a randomized trial is not available. Am J Epidemiol. 2016;183:758-764.",
+      "pmid": "26994063",
+      "doi": "10.1093/aje/kwv254",
+      "pubmed": true
+    },
+    {
+      "id": "hernan2022",
+      "number": 11,
+      "citation": "Hernán MA, Wang W, Leaf DE. Target trial emulation: a framework for causal inference from observational data. JAMA. 2022;328:2446-2447.",
+      "pmid": "36508210",
+      "doi": "10.1001/jama.2022.21383",
+      "pubmed": true
+    },
+    {
+      "id": "cashin2025",
+      "number": 12,
+      "citation": "Cashin AG, et al. Transparent reporting of observational studies emulating a target trial: the TARGET statement. JAMA. 2025;334:1084-1093.",
+      "pmid": "40899949",
+      "doi": "10.1001/jama.2025.13350",
+      "pubmed": true
+    },
+    {
+      "id": "austin2011",
+      "number": 13,
+      "citation": "Austin PC. An introduction to propensity score methods for reducing the effects of confounding in observational studies. Multivariate Behav Res. 2011;46:399-424.",
+      "pmid": "21818162",
+      "doi": "10.1080/00273171.2011.568786",
+      "pubmed": true
+    },
+    {
+      "id": "heinze2018",
+      "number": 14,
+      "citation": "Heinze G, Wallisch C, Dunkler D. Variable selection: a review and recommendations for the practicing statistician. Biom J. 2018;60:431-449.",
+      "pmid": "29292533",
+      "doi": "10.1002/bimj.201700067",
+      "pubmed": true
+    },
+    {
+      "id": "sauerbrei2020",
+      "number": 15,
+      "citation": "Sauerbrei W, et al. State of the art in selection of variables and functional forms in multivariable analysis: outstanding issues. Diagn Progn Res. 2020;4:3.",
+      "pmid": "32266321",
+      "doi": "10.1186/s41512-020-00074-3",
+      "pubmed": true
+    },
+    {
+      "id": "peduzzi1996",
+      "number": 16,
+      "citation": "Peduzzi P, et al. A simulation study of the number of events per variable in logistic regression analysis. J Clin Epidemiol. 1996;49:1373-1379.",
+      "pmid": "8970487",
+      "doi": "10.1016/s0895-4356(96)00236-3",
+      "pubmed": true
+    },
+    {
+      "id": "vittinghoff2007",
+      "number": 17,
+      "citation": "Vittinghoff E, McCulloch CE. Relaxing the rule of ten events per variable in logistic and Cox regression. Am J Epidemiol. 2007;165:710-718.",
+      "pmid": "17182981",
+      "doi": "10.1093/aje/kwk052",
+      "pubmed": true
+    },
+    {
+      "id": "vansmeden2016",
+      "number": 18,
+      "citation": "van Smeden M, et al. No rationale for 1 variable per 10 events criterion for binary logistic regression analysis. BMC Med Res Methodol. 2016;16:163.",
+      "pmid": "27881078",
+      "doi": "10.1186/s12874-016-0267-3",
+      "pubmed": true
+    },
+    {
+      "id": "vansmeden2019",
+      "number": 19,
+      "citation": "van Smeden M, et al. Sample size for binary logistic prediction models: beyond events per variable criteria. Stat Methods Med Res. 2019;28:2455-2474.",
+      "pmid": "29966490",
+      "doi": "10.1177/0962280218784726",
+      "pubmed": true
+    },
+    {
+      "id": "riley2019",
+      "number": 20,
+      "citation": "Riley RD, et al. Minimum sample size for developing a multivariable prediction model: part II, binary and time-to-event outcomes. Stat Med. 2019;38:1276-1296.",
+      "pmid": "30357870",
+      "doi": "10.1002/sim.7992",
+      "pubmed": true
+    },
+    {
+      "id": "riley2020",
+      "number": 21,
+      "citation": "Riley RD, et al. Calculating the sample size required for developing a clinical prediction model. BMJ. 2020;368:m441.",
+      "pmid": "32188600",
+      "doi": "10.1136/bmj.m441",
+      "pubmed": true
+    },
+    {
+      "id": "riley2021",
+      "number": 22,
+      "citation": "Riley RD, et al. Penalization and shrinkage methods produced unreliable clinical prediction models especially when sample size was small. J Clin Epidemiol. 2021;132:88-96.",
+      "pmid": "33307188",
+      "doi": "10.1016/j.jclinepi.2020.12.005",
+      "pubmed": true
+    },
+    {
+      "id": "vanderploeg2014",
+      "number": 23,
+      "citation": "van der Ploeg T, Austin PC, Steyerberg EW. Modern modelling techniques are data hungry: a simulation study for predicting dichotomous endpoints. BMC Med Res Methodol. 2014;14:137.",
+      "pmid": "25532820",
+      "doi": "10.1186/1471-2288-14-137",
+      "pubmed": true
+    },
+    {
+      "id": "christodoulou2019",
+      "number": 24,
+      "citation": "Christodoulou E, et al. A systematic review shows no performance benefit of machine learning over logistic regression for clinical prediction models. J Clin Epidemiol. 2019;110:12-22.",
+      "pmid": "30763612",
+      "doi": "10.1016/j.jclinepi.2019.02.004",
+      "pubmed": true
+    },
+    {
+      "id": "collins2024tripod",
+      "number": 25,
+      "citation": "Collins GS, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. BMJ. 2024;385:e078378.",
+      "pmid": "38626948",
+      "doi": "10.1136/bmj-2023-078378",
+      "pubmed": true
+    },
+    {
+      "id": "moons2025",
+      "number": 26,
+      "citation": "Moons KGM, et al. PROBAST+AI: an updated quality, risk of bias, and applicability assessment tool for prediction models using regression or artificial intelligence methods. BMJ. 2025;388:e082505.",
+      "pmid": "40127903",
+      "doi": "10.1136/bmj-2024-082505",
+      "pubmed": true
+    },
+    {
+      "id": "collins2024eval",
+      "number": 27,
+      "citation": "Collins GS, et al. Evaluation of clinical prediction models (part 1): from development to external validation. BMJ. 2024;384:e074819.",
+      "pmid": "38191193",
+      "doi": "10.1136/bmj-2023-074819",
+      "pubmed": true
+    },
+    {
+      "id": "efthimiou2024",
+      "number": 28,
+      "citation": "Efthimiou O, et al. Developing clinical prediction models: a step-by-step guide. BMJ. 2024;386:e078276.",
+      "pmid": "39227063",
+      "doi": "10.1136/bmj-2023-078276",
+      "pubmed": true
+    },
+    {
+      "id": "steyerberg2014",
+      "number": 29,
+      "citation": "Steyerberg EW, Vergouwe Y. Towards better clinical prediction models: seven steps for development and an ABCD for validation. Eur Heart J. 2014;35:1925-1931.",
+      "pmid": "24898551",
+      "doi": "10.1093/eurheartj/ehu207",
+      "pubmed": true
+    },
+    {
+      "id": "vancalster2019",
+      "number": 30,
+      "citation": "Van Calster B, et al. Calibration: the Achilles heel of predictive analytics. BMC Med. 2019;17:230.",
+      "pmid": "31842878",
+      "doi": "10.1186/s12916-019-1466-7",
+      "pubmed": true
+    },
+    {
+      "id": "vickers2006",
+      "number": 31,
+      "citation": "Vickers AJ, Elkin EB. Decision curve analysis: a novel method for evaluating prediction models. Med Decis Making. 2006;26:565-574.",
+      "pmid": "17099194",
+      "doi": "10.1177/0272989X06295361",
+      "pubmed": true
+    },
+    {
+      "id": "schober2021logistic",
+      "number": 32,
+      "citation": "Schober P, Vetter TR. Logistic regression in medical research. Anesth Analg. 2021;132:365-366.",
+      "pmid": "33449558",
+      "doi": "10.1213/ANE.0000000000005247",
+      "pubmed": true
+    },
+    {
+      "id": "norton2018",
+      "number": 33,
+      "citation": "Norton EC, Dowd BE, Maciejewski ML. Odds ratios: current best practice and use. JAMA. 2018;320:84-85.",
+      "pmid": "29971384",
+      "doi": "10.1001/jama.2018.6971",
+      "pubmed": true
+    },
+    {
+      "id": "davies1998",
+      "number": 34,
+      "citation": "Davies HT, Crombie IK, Tavakoli M. When can odds ratios mislead? BMJ. 1998;316:989-991.",
+      "pmid": "9550961",
+      "doi": "10.1136/bmj.316.7136.989",
+      "pubmed": true
+    },
+    {
+      "id": "holcomb2001",
+      "number": 35,
+      "citation": "Holcomb WL, et al. An odd measure of risk: use and misuse of the odds ratio. Obstet Gynecol. 2001;98:685-688.",
+      "pmid": "11576589",
+      "doi": "10.1016/s0029-7844(01)01488-0",
+      "pubmed": true
+    },
+    {
+      "id": "knol2012cmaj",
+      "number": 36,
+      "citation": "Knol MJ, et al. Overestimation of risk ratios by odds ratios in trials and cohort studies: alternatives to logistic regression. CMAJ. 2012;184:895-899.",
+      "pmid": "22158397",
+      "doi": "10.1503/cmaj.101715",
+      "pubmed": true
+    },
+    {
+      "id": "zhang1998",
+      "number": 37,
+      "citation": "Zhang J, Yu KF. What's the relative risk? A method of correcting the odds ratio in cohort studies of common outcomes. JAMA. 1998;280:1690-1691.",
+      "pmid": "9832001",
+      "doi": "10.1001/jama.280.19.1690",
+      "pubmed": true
+    },
+    {
+      "id": "zou2004",
+      "number": 38,
+      "citation": "Zou G. A modified Poisson regression approach to prospective studies with binary data. Am J Epidemiol. 2004;159:702-706.",
+      "pmid": "15033648",
+      "doi": "10.1093/aje/kwh090",
+      "pubmed": true
+    },
+    {
+      "id": "cummings2009",
+      "number": 39,
+      "citation": "Cummings P. The relative merits of risk ratios and odds ratios. Arch Pediatr Adolesc Med. 2009;163:438-445.",
+      "pmid": "19414690",
+      "doi": "10.1001/archpediatrics.2009.31",
+      "pubmed": true
+    },
+    {
+      "id": "ranganathan2015",
+      "number": 40,
+      "citation": "Ranganathan P, Aggarwal R, Pramesh CS. Common pitfalls in statistical analysis: odds versus risk. Perspect Clin Res. 2015;6:222-224.",
+      "pmid": "26623395",
+      "doi": "10.4103/2229-3485.167092",
+      "pubmed": true
+    },
+    {
+      "id": "doi2022",
+      "number": 41,
+      "citation": "Doi SA, et al. The odds ratio is \"portable\" across baseline risk but not the relative risk: time to do away with the log link in binomial regression. J Clin Epidemiol. 2022;142:288-293.",
+      "pmid": "34380019",
+      "doi": "10.1016/j.jclinepi.2021.08.003",
+      "pubmed": true
+    },
+    {
+      "id": "windish2007",
+      "number": 42,
+      "citation": "Windish DM, Huot SJ, Green ML. Medicine residents' understanding of the biostatistics and results in the medical literature. JAMA. 2007;298:1010-1022.",
+      "pmid": "17785646",
+      "doi": "10.1001/jama.298.9.1010",
+      "pubmed": true
+    },
+    {
+      "id": "akl2011",
+      "number": 43,
+      "citation": "Akl EA, et al. Using alternative statistical formats for presenting risks and risk reductions. Cochrane Database Syst Rev. 2011;(3):CD006776.",
+      "pmid": "21412897",
+      "doi": "10.1002/14651858.CD006776.pub2",
+      "pubmed": true
+    },
+    {
+      "id": "gigerenzer2007",
+      "number": 44,
+      "citation": "Gigerenzer G, et al. Helping doctors and patients make sense of health statistics. Psychol Sci Public Interest. 2007;8:53-96.",
+      "pmid": "26161749",
+      "doi": "10.1111/j.1539-6053.2008.00033.x",
+      "pubmed": true
+    },
+    {
+      "id": "schober2018survival",
+      "number": 45,
+      "citation": "Schober P, Vetter TR. Survival analysis and interpretation of time-to-event data: the tortoise and the hare. Anesth Analg. 2018;127:792-798.",
+      "pmid": "30015653",
+      "doi": "10.1213/ANE.0000000000003653",
+      "pubmed": true
+    },
+    {
+      "id": "hernan2010",
+      "number": 46,
+      "citation": "Hernán MA. The hazards of hazard ratios. Epidemiology. 2010;21:13-15.",
+      "pmid": "20010207",
+      "doi": "10.1097/EDE.0b013e3181c1ea43",
+      "pubmed": true
+    },
+    {
+      "id": "stensrud2020",
+      "number": 47,
+      "citation": "Stensrud MJ, Hernán MA. Why test for proportional hazards? JAMA. 2020;323:1401-1402.",
+      "pmid": "32167523",
+      "doi": "10.1001/jama.2020.1267",
+      "pubmed": true
+    },
+    {
+      "id": "royston2013",
+      "number": 48,
+      "citation": "Royston P, Parmar MKB. Restricted mean survival time: an alternative to the hazard ratio for the design and analysis of randomized trials with a time-to-event outcome. BMC Med Res Methodol. 2013;13:152.",
+      "pmid": "24314264",
+      "doi": "10.1186/1471-2288-13-152",
+      "pubmed": true
+    },
+    {
+      "id": "uno2014",
+      "number": 49,
+      "citation": "Uno H, et al. Moving beyond the hazard ratio in quantifying the between-group difference in survival analysis. J Clin Oncol. 2014;32:2380-2385.",
+      "pmid": "24982461",
+      "doi": "10.1200/JCO.2014.55.2208",
+      "pubmed": true
+    },
+    {
+      "id": "austin2016",
+      "number": 50,
+      "citation": "Austin PC, Lee DS, Fine JP. Introduction to the analysis of survival data in the presence of competing risks. Circulation. 2016;133:601-609.",
+      "pmid": "26858290",
+      "doi": "10.1161/CIRCULATIONAHA.115.017719",
+      "pubmed": true
+    },
+    {
+      "id": "andersen2012",
+      "number": 51,
+      "citation": "Andersen PK, et al. Competing risks in epidemiology: possibilities and pitfalls. Int J Epidemiol. 2012;41:861-870.",
+      "pmid": "22253319",
+      "doi": "10.1093/ije/dyr213",
+      "pubmed": true
+    },
+    {
+      "id": "latouche2013",
+      "number": 52,
+      "citation": "Latouche A, et al. A competing risks analysis should report results on all cause-specific hazards and cumulative incidence functions. J Clin Epidemiol. 2013;66:648-653.",
+      "pmid": "23415868",
+      "doi": "10.1016/j.jclinepi.2012.09.017",
+      "pubmed": true
+    },
+    {
+      "id": "austin2017",
+      "number": 53,
+      "citation": "Austin PC, Fine JP. Practical recommendations for reporting Fine-Gray model analyses for competing risk data. Stat Med. 2017;36:4391-4400.",
+      "pmid": "28913837",
+      "doi": "10.1002/sim.7501",
+      "pubmed": true
+    },
+    {
+      "id": "schober2018repeated",
+      "number": 54,
+      "citation": "Schober P, Vetter TR. Repeated measures designs and analysis of longitudinal data. Anesth Analg. 2018;127:569-575.",
+      "pmid": "29905618",
+      "doi": "10.1213/ANE.0000000000003511",
+      "pubmed": true
+    },
+    {
+      "id": "detry2016",
+      "number": 55,
+      "citation": "Detry MA, Ma Y. Analyzing repeated measurements using mixed models. JAMA. 2016;315:407-408.",
+      "pmid": "26813213",
+      "doi": "10.1001/jama.2015.19394",
+      "pubmed": true
+    },
+    {
+      "id": "hubbard2010",
+      "number": 56,
+      "citation": "Hubbard AE, et al. To GEE or not to GEE: comparing population average and mixed models. Epidemiology. 2010;21:467-474.",
+      "pmid": "20220526",
+      "doi": "10.1097/EDE.0b013e3181caeb90",
+      "pubmed": true
+    },
+    {
+      "id": "schober2021count",
+      "number": 57,
+      "citation": "Schober P, Vetter TR. Count data in medical research: Poisson regression and negative binomial regression. Anesth Analg. 2021;132:1378-1379.",
+      "pmid": "33857979",
+      "doi": "10.1213/ANE.0000000000005398",
+      "pubmed": true
+    },
+    {
+      "id": "coxe2009",
+      "number": 58,
+      "citation": "Coxe S, West SG, Aiken LS. The analysis of count data: a gentle introduction to Poisson regression and its alternatives. J Pers Assess. 2009;91:121-136.",
+      "pmid": "19205933",
+      "doi": "10.1080/00223890802634175",
+      "pubmed": true
+    },
+    {
+      "id": "liu2017",
+      "number": 59,
+      "citation": "Liu Q, et al. Modeling continuous response variables using ordinal regression. Stat Med. 2017;36:4316-4335.",
+      "pmid": "28872693",
+      "doi": "10.1002/sim.7433",
+      "pubmed": true
+    },
+    {
+      "id": "bland1986",
+      "number": 60,
+      "citation": "Bland JM, Altman DG. Statistical methods for assessing agreement between two methods of clinical measurement. Lancet. 1986;1:307-310.",
+      "pmid": "2868172",
+      "doi": null,
+      "pubmed": true
+    },
+    {
+      "id": "koo2016",
+      "number": 61,
+      "citation": "Koo TK, Li MY. A guideline of selecting and reporting intraclass correlation coefficients for reliability research. J Chiropr Med. 2016;15:155-163.",
+      "pmid": "27330520",
+      "doi": "10.1016/j.jcm.2016.02.012",
+      "pubmed": true
+    },
+    {
+      "id": "schober2018corr",
+      "number": 62,
+      "citation": "Schober P, Boer C, Schwarte LA. Correlation coefficients: appropriate use and interpretation. Anesth Analg. 2018;126:1763-1768.",
+      "pmid": "29481436",
+      "doi": "10.1213/ANE.0000000000002864",
+      "pubmed": true
+    },
+    {
+      "id": "kim2017",
+      "number": 63,
+      "citation": "Kim HY. Statistical notes for clinical researchers: chi-squared test and Fisher's exact test. Restor Dent Endod. 2017;42:152-155.",
+      "pmid": "28503482",
+      "doi": "10.5395/rde.2017.42.2.152",
+      "pubmed": true
+    },
+    {
+      "id": "mishra2019",
+      "number": 64,
+      "citation": "Mishra P, et al. Selection of appropriate statistical methods for data analysis. Ann Card Anaesth. 2019;22:297-301.",
+      "pmid": "31274493",
+      "doi": "10.4103/aca.ACA_248_18",
+      "pubmed": true
+    },
+    {
+      "id": "altman2006",
+      "number": 65,
+      "citation": "Altman DG, Royston P. The cost of dichotomising continuous variables. BMJ. 2006;332:1080.",
+      "pmid": "16675816",
+      "doi": "10.1136/bmj.332.7549.1080",
+      "pubmed": true
+    },
+    {
+      "id": "royston2006",
+      "number": 66,
+      "citation": "Royston P, Altman DG, Sauerbrei W. Dichotomizing continuous predictors in multiple regression: a bad idea. Stat Med. 2006;25:127-141.",
+      "pmid": "16217841",
+      "doi": "10.1002/sim.2331",
+      "pubmed": true
+    },
+    {
+      "id": "sterne2009",
+      "number": 67,
+      "citation": "Sterne JAC, et al. Multiple imputation for missing data in epidemiological and clinical research: potential and pitfalls. BMJ. 2009;338:b2393.",
+      "pmid": "19564179",
+      "doi": "10.1136/bmj.b2393",
+      "pubmed": true
+    },
+    {
+      "id": "white2011",
+      "number": 68,
+      "citation": "White IR, Royston P, Wood AM. Multiple imputation using chained equations: issues and guidance for practice. Stat Med. 2011;30:377-399.",
+      "pmid": "21225900",
+      "doi": "10.1002/sim.4067",
+      "pubmed": true
+    },
+    {
+      "id": "lee2021",
+      "number": 69,
+      "citation": "Lee KJ, et al. Framework for the treatment and reporting of missing data in observational studies: the TARMOS framework. J Clin Epidemiol. 2021;134:79-88.",
+      "pmid": "33539930",
+      "doi": "10.1016/j.jclinepi.2021.01.008",
+      "pubmed": true
+    },
+    {
+      "id": "greenland2016pvalues",
+      "number": 70,
+      "citation": "Greenland S, et al. Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations. Eur J Epidemiol. 2016;31:337-350.",
+      "pmid": "27209009",
+      "doi": "10.1007/s10654-016-0149-3",
+      "pubmed": true
+    },
+    {
+      "id": "wasserstein2016",
+      "number": 71,
+      "citation": "Wasserstein RL, Lazar NA. The ASA statement on p-values: context, process, and purpose. Am Stat. 2016;70(2):129-133.",
+      "pmid": null,
+      "doi": "10.1080/00031305.2016.1154108",
+      "pubmed": false
+    },
+    {
+      "id": "greenland2016sparse",
+      "number": 72,
+      "citation": "Greenland S, Mansournia MA, Altman DG. Sparse data bias: a problem hiding in plain sight. BMJ. 2016;352:i1981.",
+      "pmid": "27121591",
+      "doi": "10.1136/bmj.i1981",
+      "pubmed": true
+    },
+    {
+      "id": "knol2012interaction",
+      "number": 73,
+      "citation": "Knol MJ, VanderWeele TJ. Recommendations for presenting analyses of effect modification and interaction. Int J Epidemiol. 2012;41:514-520.",
+      "pmid": "22253321",
+      "doi": "10.1093/ije/dyr218",
+      "pubmed": true
+    },
+    {
+      "id": "kahan2014",
+      "number": 74,
+      "citation": "Kahan BC, et al. The risks and rewards of covariate adjustment in randomized trials: an assessment of 12 outcomes from 8 studies. Trials. 2014;15:139.",
+      "pmid": "24755011",
+      "doi": "10.1186/1745-6215-15-139",
+      "pubmed": true
+    },
+    {
+      "id": "kahan2024",
+      "number": 75,
+      "citation": "Kahan BC, et al. The estimands framework: a primer on the ICH E9(R1) addendum. BMJ. 2024;384:e076316.",
+      "pmid": "38262663",
+      "doi": "10.1136/bmj-2023-076316",
+      "pubmed": true
+    },
+    {
+      "id": "hopewell2025",
+      "number": 76,
+      "citation": "Hopewell S, et al. CONSORT 2025 statement: updated guideline for reporting randomised trials. Lancet. 2025.",
+      "pmid": "40245901",
+      "doi": "10.1016/S0140-6736(25)00672-5",
+      "pubmed": true
+    },
+    {
+      "id": "chan2025",
+      "number": 77,
+      "citation": "Chan AW, et al. SPIRIT 2025 statement: updated guideline for protocols of randomised trials. BMJ. 2025;389:e081477.",
+      "pmid": "40294953",
+      "doi": "10.1136/bmj-2024-081477",
+      "pubmed": true
+    },
+    {
+      "id": "vonelm2007",
+      "number": 78,
+      "citation": "von Elm E, et al. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) statement. Lancet. 2007;370:1453-1457.",
+      "pmid": "18064739",
+      "doi": "10.1016/S0140-6736(07)61602-X",
+      "pubmed": true
+    },
+    {
+      "id": "benchimol2015",
+      "number": 79,
+      "citation": "Benchimol EI, et al. The REporting of studies Conducted using Observational Routinely-collected health Data (RECORD) statement. PLoS Med. 2015;12:e1001885.",
+      "pmid": "26440803",
+      "doi": "10.1371/journal.pmed.1001885",
+      "pubmed": true
+    },
+    {
+      "id": "bossuyt2015",
+      "number": 80,
+      "citation": "Bossuyt PM, et al. STARD 2015: an updated list of essential items for reporting diagnostic accuracy studies. BMJ. 2015;351:h5527.",
+      "pmid": "26511519",
+      "doi": "10.1136/bmj.h5527",
+      "pubmed": true
+    },
+    {
+      "id": "lang2015",
+      "number": 81,
+      "citation": "Lang TA, Altman DG. Basic statistical reporting for articles published in biomedical journals: the SAMPL guidelines. Int J Nurs Stud. 2015;52:5-9.",
+      "pmid": "25441757",
+      "doi": "10.1016/j.ijnurstu.2014.09.006",
+      "pubmed": true
+    },
+    {
+      "id": "assel2019",
+      "number": 82,
+      "citation": "Assel M, et al. Guidelines for reporting of statistics for clinical research in urology. Eur Urol. 2019;75:358-367.",
+      "pmid": "30580902",
+      "doi": "10.1016/j.eururo.2018.12.014",
+      "pubmed": true
+    },
+    {
+      "id": "gamble2017",
+      "number": 83,
+      "citation": "Gamble C, et al. Guidelines for the content of statistical analysis plans in clinical trials. JAMA. 2017;318:2337-2343.",
+      "pmid": "29260229",
+      "doi": "10.1001/jama.2017.18556",
+      "pubmed": true
+    },
+    {
+      "id": "grant2019",
+      "number": 84,
+      "citation": "Grant SW, Hickey GL, Head SJ. Statistical primer: multivariable regression considerations and pitfalls. Eur J Cardiothorac Surg. 2019;55:179-185.",
+      "pmid": "30596979",
+      "doi": "10.1093/ejcts/ezy403",
+      "pubmed": true
+    },
+    {
+      "id": "harrell2015",
+      "number": 85,
+      "citation": "Harrell FE Jr. Regression Modeling Strategies. 2nd ed. Springer; 2015.",
+      "pmid": null,
+      "doi": "10.1007/978-3-319-19425-7",
+      "pubmed": false
+    },
+    {
+      "id": "austin2015",
+      "number": 86,
+      "citation": "Austin PC, Steyerberg EW. The number of subjects per variable required in linear regression analyses. J Clin Epidemiol. 2015;68:627-636.",
+      "pmid": "25704724",
+      "doi": "10.1016/j.jclinepi.2014.12.014",
+      "pubmed": true
+    },
+    {
+      "id": "heinze2002",
+      "number": 87,
+      "citation": "Heinze G, Schemper M. A solution to the problem of separation in logistic regression. Stat Med. 2002;21:2409-2419.",
+      "pmid": "12210625",
+      "doi": "10.1002/sim.1047",
+      "pubmed": true
+    },
+    {
+      "id": "mchugh2012",
+      "number": 88,
+      "citation": "McHugh ML. Interrater reliability: the kappa statistic. Biochem Med (Zagreb). 2012;22:276-282.",
+      "pmid": "23092060",
+      "doi": "10.11613/BM.2012.031",
+      "pubmed": true
+    }
+  ]
+}

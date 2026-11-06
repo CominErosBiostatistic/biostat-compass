@@ -1,0 +1,142 @@
+{
+  "cases": [
+    {
+      "name": "RCT, common 30-day mortality, for clinicians",
+      "answers": {
+        "goal": "effect",
+        "design": "rct",
+        "outcome": "binary",
+        "outcome_frequency": "common",
+        "independence": "independent",
+        "exposure": "binary",
+        "n": 400,
+        "events": 120,
+        "params": 4,
+        "missing": "none",
+        "audience": "clinicians"
+      },
+      "expectedModel": "binary_independent",
+      "expectedWarnings": [
+        "binary_common_or",
+        "effect_rct"
+      ],
+      "excludedWarnings": [
+        "epv_low",
+        "epv_very_low",
+        "effect_observational"
+      ]
+    },
+    {
+      "name": "Cohort from EHR data, time to death with competing risks, few events",
+      "answers": {
+        "goal": "effect",
+        "design": "routine_data",
+        "outcome": "time_to_event",
+        "independence": "independent",
+        "competing": "yes",
+        "exposure": "time_varying",
+        "n": 2000,
+        "events": 40,
+        "params": 10,
+        "missing": "some",
+        "audience": "publication"
+      },
+      "expectedModel": "competing_effect",
+      "expectedWarnings": [
+        "epv_very_low",
+        "competing_km",
+        "exposure_time_varying",
+        "effect_target_trial",
+        "missing_some"
+      ],
+      "excludedWarnings": [
+        "survival_ph"
+      ],
+      "expectedGuidelines": [
+        "strobe",
+        "record",
+        "target",
+        "tarmos",
+        "sampl"
+      ]
+    },
+    {
+      "name": "Prognostic model with machine learning",
+      "answers": {
+        "goal": "predict",
+        "predict_type": "prognosis",
+        "design": "cohort",
+        "outcome": "binary",
+        "outcome_frequency": "rare",
+        "independence": "independent",
+        "ml": "yes",
+        "n": 5000,
+        "events": 150,
+        "params": 20,
+        "missing": "few",
+        "audience": "publication"
+      },
+      "expectedModel": "binary_independent",
+      "expectedWarnings": [
+        "predict_ml",
+        "predict_epv_low",
+        "predict_sample_size",
+        "predict_validation"
+      ],
+      "expectedGuidelines": [
+        "tripod_ai",
+        "probast_ai"
+      ]
+    },
+    {
+      "name": "Blood pressure measured 4 times, exam",
+      "answers": {
+        "goal": "effect",
+        "design": "cohort",
+        "outcome": "continuous",
+        "independence": "repeated",
+        "exposure": "binary",
+        "n": 80,
+        "params": 3,
+        "missing": "some",
+        "audience": "exam"
+      },
+      "expectedModel": "continuous_correlated",
+      "expectedWarnings": [
+        "missing_some"
+      ],
+      "excludedWarnings": [
+        "spp_linear"
+      ]
+    },
+    {
+      "name": "Two radiologists classify the same images",
+      "answers": {
+        "goal": "agreement",
+        "design": "cross_sectional",
+        "measure_type": "categorical",
+        "n": 100,
+        "missing": "none",
+        "audience": "exam"
+      },
+      "expectedModel": "agreement_categorical"
+    },
+    {
+      "name": "Changing an answer removes answers that no longer apply",
+      "answers": {
+        "goal": "describe",
+        "design": "cohort",
+        "outcome": "count",
+        "independence": "independent",
+        "competing": "yes",
+        "n": 300,
+        "missing": "none",
+        "audience": "clinicians"
+      },
+      "expectedModel": "describe_count",
+      "excludedWarnings": [
+        "competing_km"
+      ]
+    }
+  ]
+}

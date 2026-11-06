@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: >-
+  If you use this tool, please cite it as below, with the version you used.
+  Please also cite the original methodological sources listed with each recommendation.
+type: software
+title: "Biostat Compass"
+abstract: >-
+  A web application that guides students and researchers in biostatistics to choose a
+  statistical model from the research question, study design and data structure. Every
+  recommendation is based on published methodological literature, which the tool cites.
+version: 0.1.0
+date-released: 2026-11-04
+authors:
+  - family-names: Comin
+    given-names: Eros
+    orcid: "https://orcid.org/0009-0004-9241-5998"
+license:
+  - MIT
+  - CC-BY-4.0
+repository-code: "https://github.com/CominErosBiostatistic/biostat-compass"
+url: "https://cominerosbiostatistic.github.io/biostat-compass/"
+keywords:
+  - biostatistics
+  - statistical model selection
+  - epidemiology
+  - clinical research
+  - decision support
+  - statistics education

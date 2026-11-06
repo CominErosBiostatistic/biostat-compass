@@ -1,0 +1,197 @@
+{
+  "version": "0.1",
+  "note": "Reporting guidelines, shown when the audience is a publication. All matching guidelines apply.",
+  "guidelines": [
+    {
+      "id": "consort",
+      "name": "CONSORT 2025",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "design": [
+          "rct"
+        ]
+      },
+      "use": "Article reporting the results of an RCT",
+      "sources": [
+        "hopewell2025"
+      ]
+    },
+    {
+      "id": "spirit",
+      "name": "SPIRIT 2025",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "design": [
+          "rct"
+        ]
+      },
+      "use": "Protocol of the RCT",
+      "sources": [
+        "chan2025"
+      ]
+    },
+    {
+      "id": "sap",
+      "name": "Content of statistical analysis plans (Gamble 2017)",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "design": [
+          "rct"
+        ]
+      },
+      "use": "Statistical analysis plan of the RCT",
+      "sources": [
+        "gamble2017"
+      ]
+    },
+    {
+      "id": "strobe",
+      "name": "STROBE",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "design": [
+          "cohort",
+          "case_control",
+          "cross_sectional",
+          "routine_data"
+        ],
+        "goal": [
+          "describe",
+          "effect"
+        ]
+      },
+      "use": "Observational studies",
+      "sources": [
+        "vonelm2007"
+      ]
+    },
+    {
+      "id": "record",
+      "name": "RECORD",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "design": [
+          "routine_data"
+        ]
+      },
+      "use": "Studies of routinely collected data (electronic health records, registries)",
+      "sources": [
+        "benchimol2015"
+      ]
+    },
+    {
+      "id": "target",
+      "name": "TARGET",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "effect"
+        ],
+        "design": [
+          "cohort",
+          "routine_data"
+        ]
+      },
+      "use": "If the study emulates a target trial",
+      "sources": [
+        "cashin2025"
+      ]
+    },
+    {
+      "id": "tripod_ai",
+      "name": "TRIPOD+AI",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "predict"
+        ]
+      },
+      "use": "Prediction models, with regression or machine learning",
+      "sources": [
+        "collins2024tripod"
+      ]
+    },
+    {
+      "id": "probast_ai",
+      "name": "PROBAST+AI",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "predict"
+        ]
+      },
+      "use": "Risk of bias assessment of the prediction model",
+      "sources": [
+        "moons2025"
+      ]
+    },
+    {
+      "id": "stard",
+      "name": "STARD 2015",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "test_accuracy"
+        ]
+      },
+      "use": "Diagnostic accuracy studies",
+      "sources": [
+        "bossuyt2015"
+      ]
+    },
+    {
+      "id": "tarmos",
+      "name": "TARMOS",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "missing": [
+          "some",
+          "outcome"
+        ],
+        "design": [
+          "cohort",
+          "case_control",
+          "cross_sectional",
+          "routine_data"
+        ]
+      },
+      "use": "Handling and reporting of missing data in observational studies",
+      "sources": [
+        "lee2021"
+      ]
+    },
+    {
+      "id": "sampl",
+      "name": "SAMPL",
+      "when": {
+        "audience": [
+          "publication"
+        ]
+      },
+      "use": "Basic statistical reporting, for all studies",
+      "sources": [
+        "lang2015"
+      ]
+    }
+  ]
+}

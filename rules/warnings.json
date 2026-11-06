@@ -1,0 +1,408 @@
+{
+  "version": "0.1",
+  "note": "Levels: info (advice), caution (risk of error), serious (the model may not be estimable), limit (case not covered by the app). Fields computed by the engine: epv = events / params; spp = n / params.",
+  "warnings": [
+    {
+      "id": "epv_low",
+      "level": "caution",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "epv": {
+          "gte": 5,
+          "lt": 10
+        }
+      },
+      "text": "Fewer than 10 events per parameter. The rule of 10 is conservative and estimates are often acceptable with 5-9 events, but reduce the number of parameters and run sensitivity analyses.",
+      "sources": [
+        "peduzzi1996",
+        "vittinghoff2007",
+        "vansmeden2016"
+      ]
+    },
+    {
+      "id": "epv_very_low",
+      "level": "serious",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "epv": {
+          "lt": 5
+        }
+      },
+      "text": "Fewer than 5 events per parameter: estimates may be biased. Reduce the covariates by choosing them with a DAG, use Firth's correction, or use a propensity score, which summarises the confounders in a single parameter.",
+      "sources": [
+        "vittinghoff2007",
+        "vansmeden2016",
+        "heinze2002",
+        "austin2011",
+        "tennant2021",
+        "greenland2016sparse"
+      ]
+    },
+    {
+      "id": "spp_linear",
+      "level": "serious",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "outcome": [
+          "continuous"
+        ],
+        "spp": {
+          "lt": 2
+        }
+      },
+      "text": "Fewer than 2 subjects per parameter: even linear regression cannot estimate the coefficients well.",
+      "sources": [
+        "austin2015"
+      ]
+    },
+    {
+      "id": "predict_sample_size",
+      "level": "info",
+      "when": {
+        "goal": [
+          "predict"
+        ]
+      },
+      "text": "For a prediction model, calculate the minimum sample size with Riley's criteria (the pmsampsize package): events per variable alone are not enough.",
+      "sources": [
+        "riley2019",
+        "riley2020",
+        "vansmeden2019"
+      ]
+    },
+    {
+      "id": "predict_epv_low",
+      "level": "caution",
+      "when": {
+        "goal": [
+          "predict"
+        ],
+        "epv": {
+          "lt": 10
+        }
+      },
+      "text": "Few events per parameter for a prediction model. LASSO and ridge do not solve the problem: in small samples their effect is unstable.",
+      "sources": [
+        "riley2021",
+        "vansmeden2019"
+      ]
+    },
+    {
+      "id": "predict_ml",
+      "level": "caution",
+      "when": {
+        "goal": [
+          "predict"
+        ],
+        "ml": [
+          "yes"
+        ]
+      },
+      "text": "Random forests, SVMs and neural networks may need more than 10 times the events per variable of logistic regression. On average they do not predict better than logistic regression in studies at low risk of bias.",
+      "sources": [
+        "vanderploeg2014",
+        "christodoulou2019"
+      ]
+    },
+    {
+      "id": "predict_validation",
+      "level": "info",
+      "when": {
+        "goal": [
+          "predict"
+        ]
+      },
+      "text": "Assess discrimination (AUC or C statistic), calibration and clinical utility (decision curve). Validate internally with bootstrapping or cross-validation, never on apparent performance alone.",
+      "sources": [
+        "collins2024eval",
+        "efthimiou2024",
+        "steyerberg2014",
+        "vancalster2019",
+        "vickers2006"
+      ]
+    },
+    {
+      "id": "predict_no_causal",
+      "level": "info",
+      "when": {
+        "goal": [
+          "predict"
+        ]
+      },
+      "text": "The coefficients of a prediction model are not causal effects: do not interpret them as such.",
+      "sources": [
+        "ramspek2021",
+        "westreich2013"
+      ]
+    },
+    {
+      "id": "variable_selection",
+      "level": "caution",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ]
+      },
+      "text": "Do not choose covariates with stepwise selection based on p-values. For a causal effect use a DAG; for prediction use prior knowledge, or penalisation with an adequate sample size.",
+      "sources": [
+        "heinze2018",
+        "sauerbrei2020",
+        "vanderweele2019"
+      ]
+    },
+    {
+      "id": "effect_observational",
+      "level": "info",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "design": [
+          "cohort",
+          "case_control",
+          "cross_sectional",
+          "routine_data"
+        ]
+      },
+      "text": "Observational study: state the causal aim, choose the confounders with a DAG and report only the effect of the exposure, not the coefficients of the covariates.",
+      "sources": [
+        "hernan2018",
+        "tennant2021",
+        "westreich2013",
+        "lederer2019"
+      ]
+    },
+    {
+      "id": "effect_target_trial",
+      "level": "info",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "design": [
+          "cohort",
+          "routine_data"
+        ]
+      },
+      "text": "To compare treatments with observational data, specify the target trial: eligibility criteria, time zero, treatment strategies. This avoids immortal time bias.",
+      "sources": [
+        "hernan2016",
+        "hernan2022",
+        "cashin2025"
+      ]
+    },
+    {
+      "id": "effect_rct",
+      "level": "info",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "design": [
+          "rct"
+        ]
+      },
+      "text": "In an RCT, adjust for pre-specified prognostic factors: it increases power. Define the estimand (ICH E9(R1)), especially for intercurrent events.",
+      "sources": [
+        "kahan2014",
+        "kahan2024"
+      ]
+    },
+    {
+      "id": "case_control_or",
+      "level": "info",
+      "when": {
+        "design": [
+          "case_control"
+        ],
+        "outcome": [
+          "binary"
+        ]
+      },
+      "text": "A case-control study can only estimate the odds ratio: absolute risks and risk ratios need external data on incidence.",
+      "sources": [
+        "cummings2009",
+        "ranganathan2015"
+      ]
+    },
+    {
+      "id": "case_control_matched",
+      "level": "limit",
+      "when": {
+        "design": [
+          "case_control"
+        ],
+        "independence": [
+          "paired"
+        ]
+      },
+      "text": "A matched case-control study needs conditional logistic regression, which this version of the rules does not cover yet.",
+      "sources": []
+    },
+    {
+      "id": "binary_common_or",
+      "level": "caution",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "outcome": [
+          "binary"
+        ],
+        "outcome_frequency": [
+          "common"
+        ],
+        "design": [
+          "rct",
+          "cohort",
+          "cross_sectional",
+          "routine_data"
+        ]
+      },
+      "text": "With a common outcome the odds ratio exaggerates the risk ratio. Estimate the risk ratio with modified Poisson regression, or show predicted probabilities alongside the odds ratio.",
+      "sources": [
+        "davies1998",
+        "knol2012cmaj",
+        "zhang1998",
+        "zou2004",
+        "norton2018",
+        "doi2022"
+      ]
+    },
+    {
+      "id": "survival_ph",
+      "level": "info",
+      "when": {
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "no"
+        ],
+        "goal": [
+          "effect",
+          "predict"
+        ]
+      },
+      "text": "Do not choose the model on a proportional hazards test alone. Look at the curves and, if the hazard ratio changes over time, report hazard ratios by period or the RMST.",
+      "sources": [
+        "stensrud2020",
+        "hernan2010",
+        "royston2013"
+      ]
+    },
+    {
+      "id": "competing_km",
+      "level": "caution",
+      "when": {
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "yes"
+        ]
+      },
+      "text": "With competing events, one minus Kaplan-Meier overestimates the risk: use the cumulative incidence and report results for all causes.",
+      "sources": [
+        "austin2016",
+        "andersen2012",
+        "latouche2013"
+      ]
+    },
+    {
+      "id": "exposure_continuous",
+      "level": "caution",
+      "when": {
+        "exposure": [
+          "continuous"
+        ]
+      },
+      "text": "Do not dichotomise a continuous exposure: it loses power and introduces bias. For non-linear relationships use splines or fractional polynomials.",
+      "sources": [
+        "altman2006",
+        "royston2006",
+        "sauerbrei2020"
+      ]
+    },
+    {
+      "id": "exposure_time_varying",
+      "level": "caution",
+      "when": {
+        "exposure": [
+          "time_varying"
+        ]
+      },
+      "text": "An exposure that changes over time must not be classified at baseline: this creates immortal time bias. Use time-dependent covariates or target trial emulation.",
+      "sources": [
+        "hernan2016",
+        "hernan2022"
+      ]
+    },
+    {
+      "id": "missing_few",
+      "level": "info",
+      "when": {
+        "missing": [
+          "few"
+        ]
+      },
+      "text": "Little missing data: a complete-case analysis is often acceptable, but report how much is missing and in which variables.",
+      "sources": [
+        "sterne2009",
+        "lee2021"
+      ]
+    },
+    {
+      "id": "missing_some",
+      "level": "caution",
+      "when": {
+        "missing": [
+          "some",
+          "outcome"
+        ]
+      },
+      "text": "Non-negligible missing data: describe the amount and the pattern, consider multiple imputation if missingness can be explained by observed variables (MAR), and run sensitivity analyses.",
+      "sources": [
+        "sterne2009",
+        "white2011",
+        "lee2021"
+      ]
+    },
+    {
+      "id": "pvalues",
+      "level": "info",
+      "when": {
+        "goal": [
+          "effect",
+          "predict",
+          "describe"
+        ]
+      },
+      "text": "Report estimates with confidence intervals. The p-value does not measure the size of an effect, nor the probability that the hypothesis is true.",
+      "sources": [
+        "greenland2016pvalues",
+        "wasserstein2016"
+      ]
+    },
+    {
+      "id": "interaction",
+      "level": "info",
+      "when": {
+        "goal": [
+          "effect"
+        ]
+      },
+      "text": "If you assess an interaction, report the effect in each stratum, on both the additive and the multiplicative scale.",
+      "sources": [
+        "knol2012interaction"
+      ]
+    }
+  ]
+}

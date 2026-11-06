@@ -1,0 +1,202 @@
+{
+  "version": "0.1",
+  "note": "What to show depending on the audience. All matching rules apply, not only the most specific one.",
+  "presentation": [
+    {
+      "id": "exam_general",
+      "when": {
+        "audience": [
+          "exam"
+        ]
+      },
+      "show": [
+        "The classical test or model and its non-parametric alternative",
+        "The assumptions of the model and how you checked them (residual plots, tests)",
+        "The interpretation of each main estimate in one sentence"
+      ],
+      "avoid": [
+        "Reporting only the p-value, without the estimate and its confidence interval"
+      ],
+      "sources": [
+        "mishra2019",
+        "grant2019",
+        "greenland2016pvalues"
+      ]
+    },
+    {
+      "id": "clinicians_general",
+      "when": {
+        "audience": [
+          "clinicians"
+        ]
+      },
+      "show": [
+        "Estimates in clinical units, with confidence intervals"
+      ],
+      "avoid": [
+        "The full table of model coefficients",
+        "Standardised or logit-scale coefficients"
+      ],
+      "sources": [
+        "westreich2013",
+        "windish2007"
+      ]
+    },
+    {
+      "id": "clinicians_binary",
+      "when": {
+        "audience": [
+          "clinicians"
+        ],
+        "outcome": [
+          "binary"
+        ]
+      },
+      "show": [
+        "The absolute risk in each group, as natural frequencies (for example 12 in 100)",
+        "The risk difference and the number needed to treat (NNT)",
+        "The risk ratio if the outcome is common"
+      ],
+      "avoid": [
+        "Presenting the odds ratio as if it were a risk ratio",
+        "The relative risk reduction alone: it looks larger than the absolute one"
+      ],
+      "sources": [
+        "akl2011",
+        "gigerenzer2007",
+        "holcomb2001",
+        "windish2007",
+        "knol2012cmaj"
+      ]
+    },
+    {
+      "id": "clinicians_survival",
+      "when": {
+        "audience": [
+          "clinicians"
+        ],
+        "outcome": [
+          "time_to_event"
+        ]
+      },
+      "show": [
+        "Survival or cumulative incidence curves with the number at risk",
+        "The absolute risk at a fixed clinical time (for example at 5 years) by group",
+        "The RMST: mean event-free time gained within a fixed horizon"
+      ],
+      "avoid": [
+        "The hazard ratio alone"
+      ],
+      "sources": [
+        "hernan2010",
+        "uno2014",
+        "windish2007"
+      ]
+    },
+    {
+      "id": "clinicians_count",
+      "when": {
+        "audience": [
+          "clinicians"
+        ],
+        "outcome": [
+          "count"
+        ]
+      },
+      "show": [
+        "Rates by group (for example events per 100 patient-years) alongside the rate ratio"
+      ],
+      "avoid": [],
+      "sources": [
+        "schober2021count",
+        "gigerenzer2007"
+      ]
+    },
+    {
+      "id": "clinicians_ordinal",
+      "when": {
+        "audience": [
+          "clinicians"
+        ],
+        "outcome": [
+          "ordinal"
+        ]
+      },
+      "show": [
+        "The predicted probability of each category by group, alongside the common odds ratio"
+      ],
+      "avoid": [],
+      "sources": [
+        "liu2017",
+        "norton2018"
+      ]
+    },
+    {
+      "id": "publication_general",
+      "when": {
+        "audience": [
+          "publication"
+        ]
+      },
+      "show": [
+        "The reporting guideline for the study design, with the completed checklist",
+        "Estimates with confidence intervals; exact p-values, not only < 0.05",
+        "Methods described well enough to be replicated: software, versions, handling of missing data"
+      ],
+      "avoid": [
+        "Claiming no effect from a non-significant p-value"
+      ],
+      "sources": [
+        "lang2015",
+        "assel2019",
+        "greenland2016pvalues"
+      ]
+    },
+    {
+      "id": "publication_causal",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "effect"
+        ]
+      },
+      "show": [
+        "The DAG or the criteria used to choose the confounders",
+        "Only the effect of the exposure in the main table"
+      ],
+      "avoid": [
+        "Interpreting the coefficients of the covariates (Table 2 fallacy)"
+      ],
+      "sources": [
+        "lederer2019",
+        "tennant2021",
+        "westreich2013"
+      ]
+    },
+    {
+      "id": "publication_prediction",
+      "when": {
+        "audience": [
+          "publication"
+        ],
+        "goal": [
+          "predict"
+        ]
+      },
+      "show": [
+        "Discrimination, calibration (plot) and decision curve",
+        "The full model equation, so that others can validate it externally"
+      ],
+      "avoid": [
+        "Reporting only the AUC"
+      ],
+      "sources": [
+        "collins2024tripod",
+        "vancalster2019",
+        "vickers2006"
+      ]
+    }
+  ]
+}

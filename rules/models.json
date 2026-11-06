@@ -1,0 +1,635 @@
+{
+  "version": "0.1",
+  "note": "For each combination of answers, the rule with the most matching conditions applies. The validator checks that there is always exactly one.",
+  "models": [
+    {
+      "id": "describe_continuous",
+      "when": {
+        "goal": [
+          "describe"
+        ],
+        "outcome": [
+          "continuous"
+        ]
+      },
+      "name": "Mean and standard deviation, or median and interquartile range",
+      "description": "Mean (SD) if the distribution is symmetric, median [IQR] if it is skewed, always with a confidence interval for the main estimate.",
+      "assumptions": [
+        "With repeated measurements, describe each measurement occasion separately."
+      ],
+      "sources": [
+        "lang2015",
+        "assel2019"
+      ]
+    },
+    {
+      "id": "describe_categorical",
+      "when": {
+        "goal": [
+          "describe"
+        ],
+        "outcome": [
+          "binary",
+          "ordinal",
+          "nominal"
+        ]
+      },
+      "name": "Frequencies and proportions with confidence intervals",
+      "description": "Number and percentage for each category, always with the denominator stated.",
+      "assumptions": [],
+      "sources": [
+        "lang2015",
+        "assel2019"
+      ]
+    },
+    {
+      "id": "describe_count",
+      "when": {
+        "goal": [
+          "describe"
+        ],
+        "outcome": [
+          "count"
+        ]
+      },
+      "name": "Rates per person-time",
+      "description": "Number of events divided by total observation time, for example per 1000 person-years, with a confidence interval.",
+      "assumptions": [
+        "The observation time of each subject must be known."
+      ],
+      "sources": [
+        "schober2021count",
+        "coxe2009"
+      ]
+    },
+    {
+      "id": "describe_survival",
+      "when": {
+        "goal": [
+          "describe"
+        ],
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "no"
+        ]
+      },
+      "name": "Kaplan-Meier curve",
+      "description": "Survival curve with the number at risk below the plot, median survival and survival at fixed clinical time points.",
+      "assumptions": [
+        "Censoring is non-informative: subjects who leave the study have the same risk as those who stay."
+      ],
+      "sources": [
+        "schober2018survival"
+      ]
+    },
+    {
+      "id": "describe_competing",
+      "when": {
+        "goal": [
+          "describe"
+        ],
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "yes"
+        ]
+      },
+      "name": "Cumulative incidence (Aalen-Johansen)",
+      "description": "Cumulative incidence of each type of event. One minus Kaplan-Meier overestimates the risk when there are competing events.",
+      "assumptions": [],
+      "sources": [
+        "austin2016",
+        "andersen2012"
+      ]
+    },
+    {
+      "id": "continuous_independent",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "continuous"
+        ],
+        "independence": [
+          "independent"
+        ]
+      },
+      "name": "Linear regression",
+      "description": "Estimates the mean difference in the outcome between groups, or per unit of a covariate, adjusted for the other covariates.",
+      "simpleTest": "Welch t-test for 2 groups; Mann-Whitney test if the distribution is very skewed and the sample is small; ANOVA or Kruskal-Wallis for more than 2 groups.",
+      "alternatives": [
+        {
+          "name": "Ordinal regression (proportional odds model)",
+          "when": "Very skewed outcome or outliers"
+        },
+        {
+          "name": "Splines or fractional polynomials",
+          "when": "Non-linear relationship with a continuous covariate"
+        }
+      ],
+      "measure": "Mean difference (beta coefficient) with 95% CI",
+      "assumptions": [
+        "Linear relationship with continuous covariates",
+        "Residuals with constant variance",
+        "Residuals roughly normal (less important in large samples)"
+      ],
+      "sources": [
+        "grant2019",
+        "mishra2019",
+        "austin2015",
+        "liu2017",
+        "sauerbrei2020"
+      ]
+    },
+    {
+      "id": "continuous_correlated",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "continuous"
+        ],
+        "independence": [
+          "paired",
+          "repeated",
+          "cluster"
+        ]
+      },
+      "name": "Linear mixed model",
+      "description": "Linear regression with random effects for the subject or the cluster. It uses all available measurements, even when some subjects have fewer.",
+      "simpleTest": "Paired t-test or Wilcoxon signed-rank test for 2 paired measurements; repeated-measures ANOVA only if no data are missing.",
+      "alternatives": [
+        {
+          "name": "GEE",
+          "when": "The question is about the population-average effect, not the effect on the individual subject"
+        }
+      ],
+      "measure": "Mean difference with 95% CI",
+      "assumptions": [
+        "Data missing at random (missingness explained by observed variables)",
+        "Appropriate correlation structure"
+      ],
+      "sources": [
+        "schober2018repeated",
+        "detry2016",
+        "hubbard2010"
+      ]
+    },
+    {
+      "id": "binary_independent",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "binary"
+        ],
+        "independence": [
+          "independent"
+        ]
+      },
+      "name": "Logistic regression",
+      "description": "Estimates the adjusted odds ratio. For effects on common outcomes, add the risk ratio estimated with modified Poisson regression.",
+      "simpleTest": "Chi-squared test; Fisher's exact test if any expected count is below 5.",
+      "alternatives": [
+        {
+          "name": "Modified Poisson (robust standard errors) or log-binomial regression",
+          "when": "Common outcome and the risk ratio is wanted"
+        },
+        {
+          "name": "Logistic regression with Firth's correction",
+          "when": "Few events or separation"
+        }
+      ],
+      "measure": "Odds ratio with 95% CI; risk ratio and absolute risks for clinicians",
+      "assumptions": [
+        "Linearity on the logit scale for continuous covariates",
+        "Enough events per parameter"
+      ],
+      "sources": [
+        "schober2021logistic",
+        "norton2018",
+        "zou2004",
+        "knol2012cmaj",
+        "heinze2002",
+        "kim2017"
+      ]
+    },
+    {
+      "id": "binary_correlated",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "binary"
+        ],
+        "independence": [
+          "paired",
+          "repeated",
+          "cluster"
+        ]
+      },
+      "name": "Mixed-effects logistic regression or GEE",
+      "description": "The mixed model estimates an odds ratio conditional on the subject or cluster; GEE estimates a population-average odds ratio.",
+      "simpleTest": "McNemar's test for 2 paired measurements.",
+      "alternatives": [
+        {
+          "name": "GEE",
+          "when": "The question is about the population-average effect"
+        }
+      ],
+      "measure": "Odds ratio with 95% CI",
+      "assumptions": [
+        "Enough clusters to estimate the between-cluster variance"
+      ],
+      "sources": [
+        "hubbard2010",
+        "schober2018repeated"
+      ]
+    },
+    {
+      "id": "ordinal_independent",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "ordinal"
+        ],
+        "independence": [
+          "independent"
+        ]
+      },
+      "name": "Ordinal logistic regression (proportional odds)",
+      "description": "Uses the whole order of the categories, without dichotomising the outcome.",
+      "simpleTest": "Mann-Whitney test for 2 groups; Kruskal-Wallis test for more groups.",
+      "alternatives": [
+        {
+          "name": "Multinomial logistic regression",
+          "when": "The proportional odds assumption is clearly violated"
+        }
+      ],
+      "measure": "Common odds ratio across all cut-points, with 95% CI",
+      "assumptions": [
+        "Proportional odds: the effect is the same at every cut-point of the outcome"
+      ],
+      "sources": [
+        "liu2017",
+        "harrell2015"
+      ]
+    },
+    {
+      "id": "ordinal_correlated",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "ordinal"
+        ],
+        "independence": [
+          "paired",
+          "repeated",
+          "cluster"
+        ]
+      },
+      "name": "Mixed-effects ordinal model",
+      "description": "Proportional odds model with random effects for the subject or the cluster.",
+      "simpleTest": "Wilcoxon signed-rank test for 2 paired measurements.",
+      "measure": "Common odds ratio with 95% CI",
+      "assumptions": [
+        "Proportional odds"
+      ],
+      "sources": [
+        "liu2017",
+        "hubbard2010"
+      ]
+    },
+    {
+      "id": "nominal_independent",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "nominal"
+        ],
+        "independence": [
+          "independent"
+        ]
+      },
+      "name": "Multinomial logistic regression",
+      "description": "A set of odds ratios for each category against a reference category.",
+      "simpleTest": "Chi-squared test.",
+      "measure": "Odds ratio per category with 95% CI",
+      "assumptions": [
+        "Many parameters: many events are needed in each category"
+      ],
+      "sources": [
+        "harrell2015",
+        "mishra2019"
+      ]
+    },
+    {
+      "id": "nominal_correlated",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "nominal"
+        ],
+        "independence": [
+          "paired",
+          "repeated",
+          "cluster"
+        ]
+      },
+      "name": "Mixed-effects multinomial model",
+      "description": "Multinomial logistic regression with random effects for the subject or the cluster.",
+      "measure": "Odds ratio per category with 95% CI",
+      "assumptions": [
+        "Many parameters: many events are needed in each category"
+      ],
+      "sources": [
+        "harrell2015",
+        "hubbard2010"
+      ]
+    },
+    {
+      "id": "count_independent",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "count"
+        ],
+        "independence": [
+          "independent"
+        ]
+      },
+      "name": "Poisson regression with an offset",
+      "description": "Estimates the rate ratio. The offset (log of the observation time) accounts for subjects followed for different lengths of time.",
+      "alternatives": [
+        {
+          "name": "Negative binomial regression",
+          "when": "The variance is much larger than the mean (overdispersion)"
+        },
+        {
+          "name": "Zero-inflated models",
+          "when": "Many more zeros than the model predicts"
+        }
+      ],
+      "measure": "Rate ratio with 95% CI",
+      "assumptions": [
+        "Variance equal to the mean (Poisson)",
+        "Independent events within the same subject"
+      ],
+      "sources": [
+        "schober2021count",
+        "coxe2009"
+      ]
+    },
+    {
+      "id": "count_correlated",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "count"
+        ],
+        "independence": [
+          "paired",
+          "repeated",
+          "cluster"
+        ]
+      },
+      "name": "Mixed-effects Poisson or negative binomial model",
+      "description": "Count model with random effects for the subject or the cluster.",
+      "alternatives": [
+        {
+          "name": "GEE for counts",
+          "when": "The question is about the population-average effect"
+        }
+      ],
+      "measure": "Rate ratio with 95% CI",
+      "assumptions": [
+        "Check for overdispersion"
+      ],
+      "sources": [
+        "schober2021count",
+        "hubbard2010"
+      ]
+    },
+    {
+      "id": "survival_independent",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "no"
+        ],
+        "independence": [
+          "independent"
+        ]
+      },
+      "name": "Cox model",
+      "description": "Estimates the adjusted hazard ratio. Always show it together with Kaplan-Meier curves.",
+      "simpleTest": "Kaplan-Meier curves and log-rank test.",
+      "alternatives": [
+        {
+          "name": "Restricted mean survival time (RMST)",
+          "when": "The hazard ratio changes over time, or a more intuitive measure is needed"
+        },
+        {
+          "name": "Flexible parametric models",
+          "when": "Absolute risk over time is needed, or extrapolation"
+        }
+      ],
+      "measure": "Hazard ratio with 95% CI; for clinicians, absolute risk at a fixed time and RMST",
+      "assumptions": [
+        "Non-informative censoring",
+        "Proportional hazards: if they do not hold, report hazard ratios by period or the RMST"
+      ],
+      "sources": [
+        "schober2018survival",
+        "hernan2010",
+        "stensrud2020",
+        "royston2013",
+        "uno2014"
+      ]
+    },
+    {
+      "id": "survival_correlated",
+      "when": {
+        "goal": [
+          "effect",
+          "predict"
+        ],
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "no"
+        ],
+        "independence": [
+          "paired",
+          "repeated",
+          "cluster"
+        ]
+      },
+      "name": "Cox model with frailty or robust standard errors",
+      "description": "Cox model with a random effect (frailty) for the cluster, or with robust standard errors for clustered subjects.",
+      "simpleTest": "Kaplan-Meier curves and stratified log-rank test.",
+      "measure": "Hazard ratio with 95% CI",
+      "assumptions": [
+        "Proportional hazards",
+        "Non-informative censoring"
+      ],
+      "sources": [
+        "schober2018survival",
+        "harrell2015"
+      ]
+    },
+    {
+      "id": "competing_effect",
+      "when": {
+        "goal": [
+          "effect"
+        ],
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "yes"
+        ]
+      },
+      "name": "Cause-specific Cox model",
+      "description": "For an aetiological question: one Cox model for each type of event, treating competing events as censored. Also report the cumulative incidence.",
+      "alternatives": [
+        {
+          "name": "Fine-Gray model",
+          "when": "Add it to describe the effect on the absolute risk"
+        }
+      ],
+      "measure": "Cause-specific hazard ratio with 95% CI, for each type of event",
+      "assumptions": [
+        "Proportional hazards for each cause"
+      ],
+      "sources": [
+        "austin2016",
+        "latouche2013",
+        "andersen2012"
+      ]
+    },
+    {
+      "id": "competing_predict",
+      "when": {
+        "goal": [
+          "predict"
+        ],
+        "outcome": [
+          "time_to_event"
+        ],
+        "competing": [
+          "yes"
+        ]
+      },
+      "name": "Fine-Gray model",
+      "description": "To predict the absolute risk of an event in the presence of competing events. Also report the cause-specific hazards.",
+      "measure": "Subdistribution hazard ratio and predicted cumulative incidence",
+      "assumptions": [
+        "The subdistribution hazard ratio has no simple causal interpretation"
+      ],
+      "sources": [
+        "austin2016",
+        "austin2017",
+        "latouche2013"
+      ]
+    },
+    {
+      "id": "agreement_continuous",
+      "when": {
+        "goal": [
+          "agreement"
+        ],
+        "measure_type": [
+          "continuous"
+        ]
+      },
+      "name": "Bland-Altman plot and intraclass correlation coefficient (ICC)",
+      "description": "Bland-Altman for agreement between two methods (mean difference and limits of agreement); ICC for reliability between raters or repetitions.",
+      "measure": "Mean difference and 95% limits of agreement; ICC with 95% CI",
+      "assumptions": [
+        "Do not use Pearson's correlation to measure agreement",
+        "State the type of ICC (model, type, definition)"
+      ],
+      "sources": [
+        "bland1986",
+        "koo2016",
+        "schober2018corr"
+      ]
+    },
+    {
+      "id": "agreement_categorical",
+      "when": {
+        "goal": [
+          "agreement"
+        ],
+        "measure_type": [
+          "categorical"
+        ]
+      },
+      "name": "Cohen's kappa (weighted for ordered categories)",
+      "description": "Agreement between two raters beyond the agreement expected by chance. For ordered categories use weighted kappa.",
+      "measure": "Kappa with 95% CI and raw percentage agreement",
+      "assumptions": [
+        "Kappa depends on the prevalence of the categories: also report raw agreement"
+      ],
+      "sources": [
+        "mchugh2012"
+      ]
+    },
+    {
+      "id": "test_accuracy",
+      "when": {
+        "goal": [
+          "test_accuracy"
+        ]
+      },
+      "name": "Sensitivity, specificity and ROC curve",
+      "description": "Sensitivity, specificity, predictive values and likelihood ratios against the reference standard; ROC curve and AUC for continuous tests.",
+      "measure": "Sensitivity and specificity with 95% CI; AUC with 95% CI",
+      "assumptions": [
+        "Predictive values depend on the prevalence in the sample",
+        "The reference standard must be applied to all subjects"
+      ],
+      "sources": [
+        "bossuyt2015"
+      ]
+    }
+  ]
+}
