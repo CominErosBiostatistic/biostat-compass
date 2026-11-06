@@ -9,7 +9,7 @@ abstract: >-
   statistical model from the research question, study design and data structure. Every
   recommendation is based on published methodological literature, which the tool cites.
 version: 0.1.0
-date-released: 2026-11-04
+date-released: 2026-11-06
 authors:
   - family-names: Comin
     given-names: Eros

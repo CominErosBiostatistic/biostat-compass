@@ -35,9 +35,24 @@ be installed on a phone or a computer. No data leave the device.
 | [`tools/`](tools/)                                                       | Scripts that build the sources file and the icons                                                            |
 | [`docs/`](docs/)                                                         | [Technology choice](docs/technology-choice.md) and [how to make the tool citable](docs/making-it-citable.md) |
 
+## How to cite
+
+See [`CITATION.cff`](CITATION.cff) or the **Cite** page of the app. Please also cite the original
+sources listed with each suggestion.
+
+## Disclaimer
+
+The app supports the choice of a method. It does not replace the judgement of a statistician who
+knows the study.
+
+Every result is a suggestion, not a conclusion. Before using a method, check that it fits the
+research question and the data, verify its assumptions, and discuss it with a statistician
+whenever possible. The choice of method, and the responsibility for it, always remain with the
+researcher.
+
 ## How to run it
 
-### The easy way: open it online
+### Open it online
 
 Open the app at <https://cominerosbiostatistic.github.io/biostat-compass/>. Nothing needs to be
 installed, and it works on phones, tablets and computers.
@@ -116,21 +131,6 @@ the rule files work.
 | `Address already in use`                        | Another program uses port 8765: use another number, for example `python -m http.server 8800`, and open <http://localhost:8800> |
 | After a change the app still shows the old text | Reload the page with **Ctrl + Shift + R** (on macOS **Cmd + Shift + R**)                                                       |
 
-## How to cite
-
-See [`CITATION.cff`](CITATION.cff) or the **Cite** page of the app. Please also cite the original
-sources listed with each suggestion.
-
 ## Licence
 
 Code under the MIT licence; rules and texts under CC BY 4.0. See [`LICENSE`](LICENSE).
-
-## Disclaimer
-
-The app supports the choice of a method. It does not replace the judgement of a statistician who
-knows the study.
-
-Every result is a suggestion, not a conclusion. Before using a method, check that it fits the
-research question and the data, verify its assumptions, and discuss it with a statistician
-whenever possible. The choice of method, and the responsibility for it, always remain with the
-researcher.
