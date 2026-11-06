@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "note": "What to show depending on the audience. All matching rules apply, not only the most specific one.",
+  "note": "Suggestions on what may be useful to show for each audience. All matching rules apply, not only the most specific one.",
   "presentation": [
     {
       "id": "exam_general",

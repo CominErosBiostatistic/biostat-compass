@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "note": "Levels: info (advice), caution (risk of error), serious (the model may not be estimable), limit (case not covered by the app). Fields computed by the engine: epv = events / params; spp = n / params.",
+  "note": "Levels: info (advice), caution (possible risk of error), serious (the model may not be estimable), limit (case not covered by the app). Fields computed by the engine: epv = events / params; spp = n / params.",
   "warnings": [
     {
       "id": "epv_low",
@@ -14,7 +14,7 @@
           "lt": 10
         }
       },
-      "text": "Fewer than 10 events per parameter. The rule of 10 is conservative and estimates are often acceptable with 5-9 events, but reduce the number of parameters and run sensitivity analyses.",
+      "text": "Fewer than 10 events per parameter. The rule of 10 is conservative and estimates are often acceptable with 5-9 events; you may want to reduce the number of parameters and run sensitivity analyses.",
       "sources": [
         "peduzzi1996",
         "vittinghoff2007",
@@ -32,7 +32,7 @@
           "lt": 5
         }
       },
-      "text": "Fewer than 5 events per parameter: estimates may be biased. Reduce the covariates by choosing them with a DAG, use Firth's correction, or use a propensity score, which summarises the confounders in a single parameter.",
+      "text": "Fewer than 5 events per parameter: the estimates may be biased. Options to consider: fewer covariates chosen with a DAG, Firth's correction, or a propensity score, which summarises the confounders in a single parameter.",
       "sources": [
         "vittinghoff2007",
         "vansmeden2016",
@@ -56,7 +56,7 @@
           "lt": 2
         }
       },
-      "text": "Fewer than 2 subjects per parameter: even linear regression cannot estimate the coefficients well.",
+      "text": "Fewer than 2 subjects per parameter: simulation studies suggest that even linear regression may not estimate the coefficients well.",
       "sources": [
         "austin2015"
       ]
@@ -69,7 +69,7 @@
           "predict"
         ]
       },
-      "text": "For a prediction model, calculate the minimum sample size with Riley's criteria (the pmsampsize package): events per variable alone are not enough.",
+      "text": "For a prediction model, consider calculating the minimum sample size with Riley's criteria (the pmsampsize package): events per variable alone are usually not enough.",
       "sources": [
         "riley2019",
         "riley2020",
@@ -87,7 +87,7 @@
           "lt": 10
         }
       },
-      "text": "Few events per parameter for a prediction model. LASSO and ridge do not solve the problem: in small samples their effect is unstable.",
+      "text": "Few events per parameter for a prediction model. LASSO and ridge may not solve the problem: in small samples their effect can be unstable.",
       "sources": [
         "riley2021",
         "vansmeden2019"
@@ -104,7 +104,7 @@
           "yes"
         ]
       },
-      "text": "Random forests, SVMs and neural networks may need more than 10 times the events per variable of logistic regression. On average they do not predict better than logistic regression in studies at low risk of bias.",
+      "text": "Random forests, SVMs and neural networks may need more than 10 times the events per variable of logistic regression. In the studies reviewed, at low risk of bias, they did not predict better than logistic regression on average.",
       "sources": [
         "vanderploeg2014",
         "christodoulou2019"
@@ -118,7 +118,7 @@
           "predict"
         ]
       },
-      "text": "Assess discrimination (AUC or C statistic), calibration and clinical utility (decision curve). Validate internally with bootstrapping or cross-validation, never on apparent performance alone.",
+      "text": "Consider assessing discrimination (AUC or C statistic), calibration and clinical utility (decision curve). Internal validation with bootstrapping or cross-validation is generally recommended over apparent performance alone.",
       "sources": [
         "collins2024eval",
         "efthimiou2024",
@@ -135,7 +135,7 @@
           "predict"
         ]
       },
-      "text": "The coefficients of a prediction model are not causal effects: do not interpret them as such.",
+      "text": "The coefficients of a prediction model are generally not interpretable as causal effects.",
       "sources": [
         "ramspek2021",
         "westreich2013"
@@ -150,7 +150,7 @@
           "predict"
         ]
       },
-      "text": "Do not choose covariates with stepwise selection based on p-values. For a causal effect use a DAG; for prediction use prior knowledge, or penalisation with an adequate sample size.",
+      "text": "Stepwise selection based on p-values is generally discouraged. For a causal effect, a DAG can guide the choice of covariates; for prediction, prior knowledge or penalisation with an adequate sample size.",
       "sources": [
         "heinze2018",
         "sauerbrei2020",
@@ -171,7 +171,7 @@
           "routine_data"
         ]
       },
-      "text": "Observational study: state the causal aim, choose the confounders with a DAG and report only the effect of the exposure, not the coefficients of the covariates.",
+      "text": "Observational study: the literature recommends stating the causal aim, choosing the confounders with a DAG and reporting mainly the effect of the exposure rather than the coefficients of the covariates.",
       "sources": [
         "hernan2018",
         "tennant2021",
@@ -191,7 +191,7 @@
           "routine_data"
         ]
       },
-      "text": "To compare treatments with observational data, specify the target trial: eligibility criteria, time zero, treatment strategies. This avoids immortal time bias.",
+      "text": "When comparing treatments with observational data, specifying the target trial (eligibility criteria, time zero, treatment strategies) can help avoid immortal time bias.",
       "sources": [
         "hernan2016",
         "hernan2022",
@@ -209,7 +209,7 @@
           "rct"
         ]
       },
-      "text": "In an RCT, adjust for pre-specified prognostic factors: it increases power. Define the estimand (ICH E9(R1)), especially for intercurrent events.",
+      "text": "In an RCT, adjusting for pre-specified prognostic factors usually increases power. Defining the estimand (ICH E9(R1)) is also advisable, especially for intercurrent events.",
       "sources": [
         "kahan2014",
         "kahan2024"
@@ -243,7 +243,7 @@
           "paired"
         ]
       },
-      "text": "A matched case-control study needs conditional logistic regression, which this version of the rules does not cover yet.",
+      "text": "A matched case-control study usually needs conditional logistic regression, which this version of the rules does not cover yet.",
       "sources": []
     },
     {
@@ -266,7 +266,7 @@
           "routine_data"
         ]
       },
-      "text": "With a common outcome the odds ratio exaggerates the risk ratio. Estimate the risk ratio with modified Poisson regression, or show predicted probabilities alongside the odds ratio.",
+      "text": "With a common outcome the odds ratio tends to exaggerate the risk ratio. Consider estimating the risk ratio with modified Poisson regression, or showing predicted probabilities alongside the odds ratio.",
       "sources": [
         "davies1998",
         "knol2012cmaj",
@@ -291,7 +291,7 @@
           "predict"
         ]
       },
-      "text": "Do not choose the model on a proportional hazards test alone. Look at the curves and, if the hazard ratio changes over time, report hazard ratios by period or the RMST.",
+      "text": "Choosing the model on a proportional hazards test alone is discouraged. Consider looking at the curves and, if the hazard ratio changes over time, reporting hazard ratios by period or the RMST.",
       "sources": [
         "stensrud2020",
         "hernan2010",
@@ -309,7 +309,7 @@
           "yes"
         ]
       },
-      "text": "With competing events, one minus Kaplan-Meier overestimates the risk: use the cumulative incidence and report results for all causes.",
+      "text": "With competing events, one minus Kaplan-Meier tends to overestimate the risk: the cumulative incidence, with results for all causes, is usually preferable.",
       "sources": [
         "austin2016",
         "andersen2012",
@@ -324,7 +324,7 @@
           "continuous"
         ]
       },
-      "text": "Do not dichotomise a continuous exposure: it loses power and introduces bias. For non-linear relationships use splines or fractional polynomials.",
+      "text": "Dichotomising a continuous exposure is generally discouraged: it loses power and can introduce bias. For non-linear relationships, splines or fractional polynomials are an option.",
       "sources": [
         "altman2006",
         "royston2006",
@@ -339,7 +339,7 @@
           "time_varying"
         ]
       },
-      "text": "An exposure that changes over time must not be classified at baseline: this creates immortal time bias. Use time-dependent covariates or target trial emulation.",
+      "text": "Classifying an exposure that changes over time at baseline can create immortal time bias. Time-dependent covariates or target trial emulation are options to consider.",
       "sources": [
         "hernan2016",
         "hernan2022"
@@ -353,7 +353,7 @@
           "few"
         ]
       },
-      "text": "Little missing data: a complete-case analysis is often acceptable, but report how much is missing and in which variables.",
+      "text": "Little missing data: a complete-case analysis is often acceptable, but it is good practice to report how much is missing and in which variables.",
       "sources": [
         "sterne2009",
         "lee2021"
@@ -368,7 +368,7 @@
           "outcome"
         ]
       },
-      "text": "Non-negligible missing data: describe the amount and the pattern, consider multiple imputation if missingness can be explained by observed variables (MAR), and run sensitivity analyses.",
+      "text": "Non-negligible missing data: consider describing the amount and the pattern, multiple imputation if missingness can be explained by observed variables (MAR), and sensitivity analyses.",
       "sources": [
         "sterne2009",
         "white2011",
@@ -385,7 +385,7 @@
           "describe"
         ]
       },
-      "text": "Report estimates with confidence intervals. The p-value does not measure the size of an effect, nor the probability that the hypothesis is true.",
+      "text": "Estimates with confidence intervals are generally more informative than p-values alone. The p-value does not measure the size of an effect, nor the probability that the hypothesis is true.",
       "sources": [
         "greenland2016pvalues",
         "wasserstein2016"
@@ -399,7 +399,7 @@
           "effect"
         ]
       },
-      "text": "If you assess an interaction, report the effect in each stratum, on both the additive and the multiplicative scale.",
+      "text": "If you assess an interaction, it is recommended to report the effect in each stratum, on both the additive and the multiplicative scale.",
       "sources": [
         "knol2012interaction"
       ]

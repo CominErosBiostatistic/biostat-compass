@@ -5,7 +5,7 @@
       "id": "goal",
       "short": "Research question",
       "text": "What is the research question?",
-      "help": "The aim decides the method more than the shape of the data. A causal analysis and a prediction model use different covariates and different quality measures.",
+      "help": "The aim of the analysis usually matters more than the shape of the data. A causal analysis and a prediction model use different covariates and different quality measures.",
       "type": "choice",
       "options": [
         {
@@ -406,7 +406,7 @@
       "id": "audience",
       "short": "Audience",
       "text": "Who are the results for?",
-      "help": "This does not change the right model for the data: it changes what to show and which formal requirements apply.",
+      "help": "This does not change which model suits the data: it changes what may be useful to show and which formal requirements may apply.",
       "type": "choice",
       "options": [
         {

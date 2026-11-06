@@ -18,7 +18,15 @@ const APP = {
   doi: null, // Zenodo concept DOI, to add after the first release
 };
 
-const LEVEL_NAMES = { serious: "Serious", caution: "Caution", limit: "Not covered", info: "Advice" };
+const LEVEL_NAMES = { serious: "Important", caution: "Caution", limit: "Not covered", info: "Advice" };
+
+// Shown on every result, on screen, in print and in the copied text
+const DISCLAIMER = "The app supports the choice of a method. It does not replace the judgement of a statistician who knows the study.";
+const RESPONSIBILITY = [
+  "This is a suggestion, not a conclusion. It comes from published recommendations and from your answers, but the app cannot know every detail of your study.",
+  "Before using the method, check that it fits your research question and your data, verify its assumptions, and discuss it with a statistician whenever possible.",
+  "The choice of method, and the responsibility for it, always remain with the researcher.",
+];
 
 // Examples on the home page: they lead straight to a result
 const EXAMPLES = [
@@ -152,8 +160,8 @@ function homePage() {
     <section class="hero">
       <span class="badge">Evidence-based, with every source cited</span>
       <h1>Which statistical model fits your data?</h1>
-      <p class="lead">Answer a few questions about your research question, study design and data. Get the recommended method,
-      the assumptions to check, how to present the results to your audience, and the publications behind every recommendation.</p>
+      <p class="lead">Answer a few questions about your research question, study design and data. Get a suggested method,
+      the assumptions to check, ideas on presenting the results to your audience, and the publications behind every suggestion.</p>
       <div class="row">
         <a class="btn primary" href="#/questions" data-action="new">Start</a>
         ${Object.keys(state.answers).length ? '<a class="btn" href="#/questions">Continue where you left off</a>' : ""}
@@ -172,7 +180,7 @@ function homePage() {
       <ol class="steps">
         <li><span><strong>The question before the data.</strong> Describing, estimating an effect and predicting need different methods, even on the same data.</span></li>
         <li><span><strong>Then design, outcome and data structure.</strong> Questions appear only when they matter: between 5 and 12 in total.</span></li>
-        <li><span><strong>Finally the audience.</strong> It does not change the right model, it changes what to show and which guidelines to follow.</span></li>
+        <li><span><strong>Finally the audience.</strong> It does not change which model suits the data, it changes what may be useful to show and which guidelines may apply.</span></li>
       </ol>
     </section>
 
@@ -300,9 +308,10 @@ function resultPage(query) {
   const audience = answerLabel(question("audience"), r.answers.audience);
   const modelSection = `
     <section class="card recommendation">
-      <p class="kicker">Recommended method · ${esc(audience)}</p>
+      <p class="kicker">Suggested method · ${esc(audience)}</p>
       <h1>${esc(m.name)}${ref(m.sources)}</h1>
       <p>${esc(m.description)}</p>
+      <p class="small">A suggestion to evaluate, not a conclusion: see <a href="#note" data-note>the note at the end</a>.</p>
       <div class="facts">
         ${m.measure ? `<div class="fact"><h3>Effect measure</h3><p>${esc(m.measure)}</p></div>` : ""}
         ${m.simpleTest ? `<div class="fact"><h3>Equivalent simple test</h3><p>${esc(m.simpleTest)}</p></div>` : ""}
@@ -311,12 +320,12 @@ function resultPage(query) {
     ${m.alternatives?.length || m.assumptions?.length ? `
     <section class="card">
       ${m.alternatives?.length ? `<h2>Alternatives</h2><ul class="list">${m.alternatives.map((a) => `<li><strong>${esc(a.name)}</strong>: ${esc(a.when.charAt(0).toLowerCase() + a.when.slice(1))}</li>`).join("")}</ul>` : ""}
-      ${m.assumptions?.length ? `<h2 style="margin-top:${m.alternatives?.length ? "20px" : "0"}">To check</h2><ul class="list">${m.assumptions.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : ""}
+      ${m.assumptions?.length ? `<h2 style="margin-top:${m.alternatives?.length ? "20px" : "0"}">Assumptions to check</h2><ul class="list">${m.assumptions.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>` : ""}
     </section>` : ""}`;
 
   const warningSection = r.warnings.length ? `
     <section class="card">
-      <h2>Warnings for your case</h2>
+      <h2>Points to consider for your case</h2>
       ${r.warnings.map((w) => `
         <div class="warning ${esc(w.level)}">
           <span class="level">${esc(LEVEL_NAMES[w.level] ?? w.level)}</span>
@@ -328,16 +337,16 @@ function resultPage(query) {
   const avoid = r.presentation.flatMap((p) => p.avoid.map((t) => ({ t, s: p.sources })));
   const presentationSection = show.length || avoid.length ? `
     <section class="card">
-      <h2>How to present the results</h2>
+      <h2>Suggestions for presenting the results</h2>
       <div class="show-avoid">
-        <div class="show"><h3>Show</h3><ul>${show.map((x) => `<li>${esc(x.t)}${ref(x.s)}</li>`).join("")}</ul></div>
-        ${avoid.length ? `<div class="avoid"><h3>Avoid</h3><ul>${avoid.map((x) => `<li>${esc(x.t)}${ref(x.s)}</li>`).join("")}</ul></div>` : ""}
+        <div class="show"><h3>You might show</h3><ul>${show.map((x) => `<li>${esc(x.t)}${ref(x.s)}</li>`).join("")}</ul></div>
+        ${avoid.length ? `<div class="avoid"><h3>Usually best avoided</h3><ul>${avoid.map((x) => `<li>${esc(x.t)}${ref(x.s)}</li>`).join("")}</ul></div>` : ""}
       </div>
     </section>` : "";
 
   const guidelineSection = r.guidelines.length ? `
     <section class="card">
-      <h2>Reporting guidelines</h2>
+      <h2>Reporting guidelines to consider</h2>
       <div class="guidelines">
         ${r.guidelines.map((g) => `<div class="guideline"><strong>${esc(g.name)}${ref(g.sources)}</strong><span class="small">${esc(g.use)}</span></div>`).join("")}
       </div>
@@ -368,13 +377,18 @@ function resultPage(query) {
   const cit = citations();
   main.innerHTML = `
     ${body}
+    <section class="card note" id="note">
+      <h2>A suggestion, not a conclusion</h2>
+      ${RESPONSIBILITY.map((t) => `<p>${esc(t)}</p>`).join("")}
+      <p class="small">${esc(DISCLAIMER)}</p>
+    </section>
     <section class="card">
       <h2>Sources</h2>
       <ol class="sources">${sourceList}</ol>
     </section>
     <section class="card">
       <h2>Citing this result</h2>
-      <p class="small">If you use this recommendation in a thesis, a protocol or an article, cite the tool and, above all, the original sources listed above.</p>
+      <p class="small">If you use this suggestion in a thesis, a protocol or an article, cite the tool and, above all, the original sources listed above.</p>
       <div class="format"><pre>${esc(cit.APA)}</pre></div>
       <a href="#/cite">More formats (Vancouver, BibTeX, sentence for the Methods section)</a>
     </section>
@@ -393,6 +407,10 @@ function resultPage(query) {
     li.style.background = "var(--primary-soft)";
     setTimeout(() => { li.style.background = ""; }, 1600);
   }));
+  main.querySelector("[data-note]").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("note").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   main.querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => {
     state.current = b.dataset.edit;
     saveDraft();
@@ -411,18 +429,22 @@ function plainText(r, sourceOrder) {
   const lines = [
     `${APP.name} ${APP.version}`,
     "",
-    `RECOMMENDED METHOD: ${m.name}${n(m.sources)}`,
+    `SUGGESTED METHOD: ${m.name}${n(m.sources)}`,
     m.description,
     m.measure ? `Effect measure: ${m.measure}` : null,
     m.simpleTest ? `Simple test: ${m.simpleTest}` : null,
     ...(m.alternatives ?? []).map((a) => `Alternative: ${a.name} (${a.when})`),
     ...(m.assumptions ?? []).map((a) => `To check: ${a}`),
     "",
-    r.warnings.length ? "WARNINGS" : null,
+    r.warnings.length ? "POINTS TO CONSIDER" : null,
     ...r.warnings.map((w) => `- [${LEVEL_NAMES[w.level]}] ${w.text}${n(w.sources)}`),
     "",
     "ANSWERS",
     ...activeQuestions(rules.questions, r.answers).map((q) => `- ${q.short}: ${answerLabel(q, r.answers[q.id])}`),
+    "",
+    "A SUGGESTION, NOT A CONCLUSION",
+    ...RESPONSIBILITY,
+    DISCLAIMER,
     "",
     "SOURCES",
     ...sourceOrder.map((id, i) => { const s = rules.sources.find((x) => x.id === id); return `${i + 1}. ${s.citation}${s.doi ? ` https://doi.org/${s.doi}` : ""}`; }),
@@ -468,7 +490,7 @@ function citePage() {
         </div>`).join("")}
     <section class="card">
       <h2>Also cite the original sources</h2>
-      <p>The tool summarises recommendations published by others. In the result, every recommendation has numbered references:
+      <p>The tool summarises recommendations published by others. In the result, every suggestion has numbered references:
       those are the ones to cite to justify the choice of method.</p>
       ${APP.doi ? "" : `<p class="small">A permanent DOI will be available from the first release archived on Zenodo. Until then, use the link and the version.</p>`}
       <p class="small">A <a href="${APP.repo}/blob/main/CITATION.cff" target="_blank" rel="noopener">CITATION.cff</a> file is available for GitHub and reference managers.</p>
@@ -495,6 +517,11 @@ function methodPage() {
       <h2>How they are checked</h2>
       <p>A validator explores every possible combination of answers and checks that each one leads to exactly one model,
       that every rule cites existing sources and that every model can be reached. Test cases check the expected results.</p>
+    </section>
+    <section class="card">
+      <h2>Disclaimer</h2>
+      <p>${esc(DISCLAIMER)}</p>
+      ${RESPONSIBILITY.slice(1).map((t) => `<p>${esc(t)}</p>`).join("")}
     </section>
     <section class="card">
       <h2>Limits</h2>
