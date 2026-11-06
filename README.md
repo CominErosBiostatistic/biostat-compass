@@ -11,6 +11,8 @@ it, always remain with the researcher.
 
 **[Open the app](https://cominerosbiostatistic.github.io/biostat-compass/)**
 
+The app online always runs the latest public version: [![Latest version](https://img.shields.io/github/v/release/CominErosBiostatistic/biostat-compass?label=version)](https://github.com/CominErosBiostatistic/biostat-compass/releases/latest)
+
 ## What it gives
 
 | Part                   | Content                                                                                        |
