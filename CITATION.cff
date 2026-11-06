@@ -8,7 +8,8 @@ abstract: >-
   A web application that guides students and researchers in biostatistics to choose a
   statistical model from the research question, study design and data structure. Every
   recommendation is based on published methodological literature, which the tool cites.
-version: 0.1.0
+  The project was built entirely with Claude Code (Anthropic), directed and reviewed by the author.
+version: 0.1.1
 date-released: 2026-11-06
 authors:
   - family-names: Comin

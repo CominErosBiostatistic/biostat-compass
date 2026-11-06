@@ -50,6 +50,13 @@ research question and the data, verify its assumptions, and discuss it with a st
 whenever possible. The choice of method, and the responsibility for it, always remain with the
 researcher.
 
+## How it was made
+
+Biostat Compass was built entirely with Claude Code, Anthropic's AI coding assistant. Claude Code wrote the code, searched PubMed for the literature, verified the references (PMID, DOI, year), drafted the rules and the texts, and ran the tests. The author directed the project, decided what the app should do and how it should speak, reviewed the results, and is responsible for the content.
+
+Every reference can be checked through its PubMed or DOI link, and the rules are validated by the
+test page described below.
+
 ## How to run it
 
 ### Open it online

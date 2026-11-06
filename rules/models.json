@@ -12,14 +12,25 @@
           "continuous"
         ]
       },
-      "name": "Mean and standard deviation, or median and interquartile range",
-      "description": "Mean (SD) if the distribution is symmetric, median [IQR] if it is skewed, always with a confidence interval for the main estimate.",
+      "name": "Mean and standard deviation, and median and interquartile range",
+      "description": "Report both: mean (SD) and median [IQR], with a confidence interval for the main estimate. If the mean and the median differ noticeably, the distribution is probably skewed, and the median [IQR] is usually the more representative summary.",
       "assumptions": [
-        "With repeated measurements, describe each measurement occasion separately."
+        "Compare mean and median, and look at a histogram or box plot, to judge whether the distribution is symmetric",
+        "With repeated measurements, describe each measurement occasion separately.",
+        "The coefficients of a descriptive regression describe differences in the data; adjusting for other variables changes their meaning and does not make them causal"
       ],
       "sources": [
         "lang2015",
-        "assel2019"
+        "assel2019",
+        "hernan2019",
+        "westreich2013"
+      ],
+      "measure": "Mean (SD) and median [IQR]; mean difference with 95% CI when describing groups",
+      "alternatives": [
+        {
+          "name": "Simple linear regression (descriptive)",
+          "when": "To describe how the mean of the outcome differs between groups or along a variable: each coefficient is the difference in means per category or per unit, read as a description, not as a causal effect"
+        }
       ]
     },
     {

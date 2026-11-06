@@ -16,8 +16,9 @@ section, and every result shows the citation of the tool next to the original so
 ## 2. DOI from Zenodo
 
 Zenodo (run by CERN) archives every GitHub release and gives it a free, permanent DOI. It reads
-the metadata from `CITATION.cff`, including the ORCID, so the record is linked to the author's
-ORCID profile.
+the metadata from [`../.zenodo.json`](../.zenodo.json), including the ORCID, so the record is linked
+to the author's ORCID profile. (The first attempt, v0.1.0, failed when Zenodo read `CITATION.cff`,
+which lists two licences; `.zenodo.json` takes precedence and lists one.)
 
 Order of the steps: the repository must exist and be public before Zenodo can see it, and Zenodo
 must be switched on before the release, because it archives only releases made after that.
@@ -39,6 +40,7 @@ must be switched on before the release, because it archives only releases made a
    (`doi:`), add the DOI badge to the README, and publish the change.
 
 For every new version: update the version in `app.js`, `sw.js`, `index.html` and `CITATION.cff`
+(keep `.zenodo.json` in step with `CITATION.cff` if the authors or description change)
 (also `date-released`), then create a new release. Zenodo assigns the new version DOI automatically.
 
 ## 3. Article (optional)

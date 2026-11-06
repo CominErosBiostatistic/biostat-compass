@@ -6,7 +6,7 @@ import { recommend, activeQuestions, nextQuestion, cleanAnswers } from "./engine
 // Release data: update together with CITATION.cff, sw.js and index.html at every release
 const APP = {
   name: "Biostat Compass",
-  version: "0.1.0",
+  version: "0.1.1",
   year: 2026,
   author: {
     familyName: "Comin",
@@ -149,6 +149,49 @@ function citations(today = new Date()) {
     ].filter(Boolean).join("\n"),
     Methods: `The choice of statistical method was guided by ${name} (version ${version}; ${author.familyName}, ${year}), which applies recommendations from the methodological literature; the sources of the individual recommendations are cited in the text.`,
   };
+}
+
+// ---------- Feedback by email ----------
+
+// Address that receives feedback; while it is null the feedback buttons are hidden
+const FEEDBACK_EMAIL = null; // e.g. "biostat.compass@example.org"
+
+const FEEDBACK_TYPES = {
+  thanks: { label: "It was useful", subject: "Feedback", prompt: "What was useful:" },
+  problem: { label: "Something is wrong or incomplete", subject: "Problem with a suggestion", prompt: "What looks wrong, inappropriate or incomplete, and what you expected:" },
+  idea: { label: "Suggest an addition", subject: "Suggestion", prompt: "What you would add (a method, a question, a source with PMID or DOI):" },
+};
+
+// Opens the user's email app with subject and text already filled in.
+// Nothing is sent until the user presses Send in their own email app.
+function feedbackLink(type, withResult) {
+  const f = FEEDBACK_TYPES[type];
+  const lines = [
+    f.prompt,
+    "",
+    "",
+    "",
+    "----",
+    withResult ? `Link to my result (it contains my answers): ${location.href}` : null,
+    withResult ? "If useful, attach the PDF of the result (Print or save as PDF)." : null,
+    `${APP.name} ${APP.version}`,
+  ].filter((x) => x !== null);
+  const subject = `[${APP.name} ${APP.version}] ${f.subject}`;
+  return `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+function feedbackSection(withResult) {
+  if (!FEEDBACK_EMAIL) return "";
+  return `
+    <section class="card">
+      <h2>Send feedback</h2>
+      <p class="small">A word of thanks, a suggestion that looks wrong or incomplete, or something to add: every message helps improve the rules.
+      The button opens your email app with the text ready; nothing is sent until you press Send.${withResult ? " The link to this result is included, so the author can see your answers." : ""}</p>
+      <div class="row">
+        ${Object.entries(FEEDBACK_TYPES).map(([k, f]) => `<a class="btn${k === "problem" ? " primary" : ""}" href="${esc(feedbackLink(k, withResult))}">${esc(f.label)}</a>`).join("")}
+      </div>
+      <p class="small">No email app? Write to <a href="mailto:${esc(FEEDBACK_EMAIL)}">${esc(FEEDBACK_EMAIL)}</a>.</p>
+    </section>`;
 }
 
 // ---------- Pages ----------
@@ -392,6 +435,7 @@ function resultPage(query) {
       <div class="format"><pre>${esc(cit.APA)}</pre></div>
       <a href="#/cite">More formats (Vancouver, BibTeX, sentence for the Methods section)</a>
     </section>
+    ${feedbackSection(true)}
     <div class="actions row">
       <button class="btn primary" data-action="link">Copy link</button>
       <button class="btn" data-action="text">Copy as text</button>
@@ -529,14 +573,20 @@ function methodPage() {
         <li>It supports the choice of a method: it does not know your study better than you do, and it does not replace a statistician.</li>
         <li>Not covered yet: matched case-control studies, cross-over trials, non-inferiority, meta-analysis, Bayesian methods, g-methods for time-varying exposures.</li>
         <li>The sources were collected with a targeted search, not a systematic review.</li>
-        <li>Your answers stay on your device: the tool sends no data.</li>
+        <li>Your answers stay on your device: the tool sends no data. Only if you choose to send feedback does your email app send the message you write.</li>
       </ul>
     </section>
     <section class="card">
+      <h2>How it was made</h2>
+      <p>Biostat Compass was built entirely with Claude Code, Anthropic's AI coding assistant. Claude Code wrote the code, searched PubMed for the literature, verified the references (PMID, DOI, year), drafted the rules and the texts, and ran the tests. The author directed the project, decided what the app should do and how it should speak, reviewed the results, and is responsible for the content.</p>
+      <p class="small">Like every rule, the literature behind the app can be checked: each source has its PubMed or DOI link.</p>
+    </section>
+    <section class="card">
       <h2>Contributing</h2>
-      <p>Found a mistake or a more recent source? Open an issue on the <a href="${APP.repo}/issues" target="_blank" rel="noopener">repository</a>,
-      with the publication (PMID or DOI) that supports the change.</p>
-    </section>`;
+      <p>Found a mistake or a more recent source? ${FEEDBACK_EMAIL ? "Send feedback by email (below) or open" : "Open"} an issue on the <a href="${APP.repo}/issues" target="_blank" rel="noopener">repository</a>,
+      if possible with the publication (PMID or DOI) that supports the change.</p>
+    </section>
+    ${feedbackSection(false)}`;
 }
 
 // ---------- Navigation ----------
