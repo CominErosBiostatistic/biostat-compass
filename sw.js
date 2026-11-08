@@ -1,6 +1,6 @@
 // Service worker: makes the app available offline.
 // Change VERSION at every release, so phones download the new files.
-const VERSION = "bc-0.2.0";
+const VERSION = "bc-0.2.1";
 
 const FILES = [
   "./",
