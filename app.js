@@ -339,12 +339,26 @@ function resultPage(query) {
   const r = recommend(rules, state.answers);
   const m = r.model;
 
-  // Reference numbers, in the order they appear on the page
+  // Reference numbers, 1 to N in the order they first appear on this page.
+  // A source cited again keeps its first number, so each group is sorted
+  // and runs of three or more are shortened: [10,4,11,3,2,12] → [2–4,10–12].
   const numbers = new Map();
+  const link = (x) => `<a href="#ref-${x}" data-ref="${x}">${x}</a>`;
   const ref = (ids) => {
     if (!ids?.length) return "";
-    const n = ids.map((id) => { if (!numbers.has(id)) numbers.set(id, numbers.size + 1); return numbers.get(id); });
-    return `<sup class="ref">[${n.map((x) => `<a href="#ref-${x}" data-ref="${x}">${x}</a>`).join(",")}]</sup>`;
+    const n = [...new Set(ids.map((id) => {
+      if (!numbers.has(id)) numbers.set(id, numbers.size + 1);
+      return numbers.get(id);
+    }))].sort((a, b) => a - b);
+    const parts = [];
+    for (let i = 0; i < n.length; ) {
+      let j = i;
+      while (j + 1 < n.length && n[j + 1] === n[j] + 1) j++;
+      if (j - i >= 2) parts.push(`${link(n[i])}–${link(n[j])}`);
+      else for (let k = i; k <= j; k++) parts.push(link(n[k]));
+      i = j + 1;
+    }
+    return `<sup class="ref">[${parts.join(",")}]</sup>`;
   };
 
   const audience = answerLabel(question("audience"), r.answers.audience);
