@@ -1,8 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Decision tree: one question, two branches, one branch chosen -->
+  <!-- Compass: a ring with four cardinal ticks and a needle pointing north-east -->
   <rect width="512" height="512" rx="112" fill="#0f6e78"/>
-  <path d="M256 150 L256 236 M256 236 L156 330 M256 236 L356 330" stroke="#ffffff" stroke-width="30" stroke-linecap="round" fill="none"/>
-  <circle cx="256" cy="140" r="52" fill="#ffffff"/>
-  <circle cx="148" cy="352" r="46" fill="none" stroke="#ffffff" stroke-width="26"/>
-  <circle cx="364" cy="352" r="52" fill="#9ee6ea"/>
+
+  <!-- Ring -->
+  <circle cx="256" cy="256" r="166" fill="none" stroke="#ffffff" stroke-width="28"/>
+
+  <!-- Cardinal ticks (N, E, S, W), inside the ring -->
+  <path d="M256 118 L256 150 M394 256 L362 256 M256 394 L256 362 M118 256 L150 256"
+        stroke="#ffffff" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Needle: the light half points the way, the white half is the tail -->
+  <polygon points="348,164 287,287 225,225" fill="#9ee6ea"/>
+  <polygon points="164,348 287,287 225,225" fill="#ffffff"/>
+
+  <!-- Pivot -->
+  <circle cx="256" cy="256" r="16" fill="#0f6e78"/>
 </svg>

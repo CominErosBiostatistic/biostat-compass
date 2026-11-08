@@ -1,4 +1,4 @@
-"""Builds the PNG icons of the app (same drawing as icons/icon.svg), with no external libraries.
+"""Builds the PNG icons of the app (same compass drawing as icons/icon.svg), with no external libraries.
 
 Usage: python tools/build_icons.py icons
 """
@@ -16,18 +16,33 @@ def colour_at(x, y):
     cx, cy = min(max(x, r), 512 - r), min(max(y, r), 512 - r)
     if (x - cx) ** 2 + (y - cy) ** 2 > r * r:
         return None
-    # Branch segments (width 30, rounded ends)
     def near(ax, ay, bx, by, w):
+        """True if the point is within w/2 of segment A-B (rounded ends)."""
         dx, dy = bx - ax, by - ay
         t = max(0, min(1, ((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy)))
         return math.hypot(x - (ax + t * dx), y - (ay + t * dy)) <= w / 2
-    if math.hypot(x - 364, y - 352) <= 52:
+
+    def inside(a, b, c):
+        """True if the point lies inside triangle a-b-c."""
+        def side(p, q):
+            return (q[0] - p[0]) * (y - p[1]) - (q[1] - p[1]) * (x - p[0])
+        s1, s2, s3 = side(a, b), side(b, c), side(c, a)
+        return (s1 >= 0 and s2 >= 0 and s3 >= 0) or (s1 <= 0 and s2 <= 0 and s3 <= 0)
+
+    # Pivot, drawn on top of the needle
+    if math.hypot(x - 256, y - 256) <= 16:
+        return BACKGROUND
+    # Needle: light half towards north-east, white tail towards south-west
+    if inside((348, 164), (287, 287), (225, 225)):
         return LIGHT
-    if math.hypot(x - 256, y - 140) <= 52:
+    if inside((164, 348), (287, 287), (225, 225)):
         return WHITE
-    if abs(math.hypot(x - 148, y - 352) - 46) <= 13:
+    # Ring (radius 166, width 28)
+    if abs(math.hypot(x - 256, y - 256) - 166) <= 14:
         return WHITE
-    if near(256, 150, 256, 236, 30) or near(256, 236, 156, 330, 30) or near(256, 236, 356, 330, 30):
+    # Cardinal ticks (width 20, rounded ends)
+    if (near(256, 118, 256, 150, 20) or near(394, 256, 362, 256, 20)
+            or near(256, 394, 256, 362, 20) or near(118, 256, 150, 256, 20)):
         return WHITE
     return BACKGROUND
 
